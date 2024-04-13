@@ -1,0 +1,29 @@
+:host(app-header) {
+  width: 100%;
+
+  form {
+    position: relative;
+
+    .search-input {
+      border: none;
+      font-weight: 300;
+      font-size: 14px;
+      padding: 0.7rem 1rem 0.7rem 2.5rem;
+      min-width: 300px;
+
+      &::placeholder {
+        color: var(--bs-light)
+      }
+
+      &::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+        appearance: none;
+      }
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 10px;
+    }
+  }
+}

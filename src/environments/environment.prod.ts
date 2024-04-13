@@ -1,8 +1,8 @@
-import {ENVIRONMENT, Theme} from "./environment.model";
+import { ENVIRONMENT, Theme } from './environment.model';
 
 export const environment: ENVIRONMENT = {
   production: true,
   apiUrl: '',
-  theme: Theme.dark,
+  theme: Theme.light,
   elementsPerPage: 10
 };

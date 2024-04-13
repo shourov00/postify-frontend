@@ -1,0 +1,8 @@
+.photos {
+  overflow-y: auto;
+  max-height: 300px;
+
+  .photo {
+    height: 100px;
+  }
+}

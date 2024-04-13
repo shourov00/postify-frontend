@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-md-8">
+        <div class="d-flex flex-column gap-4">
+            <app-welcome-card/>
+
+            <app-articles [posts]="postsRes?.posts || []"/>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="d-flex flex-column gap-4">
+            <app-statistics
+                    [totalPhotos]="photosRes?.total || 0" [totalPosts]="postsRes?.total || 0"
+                    [totalAlbums]="albumRes?.total || 0"/>
+
+            <app-photos [photos]="photosRes?.photos || []"/>
+        </div>
+    </div>
+</div>

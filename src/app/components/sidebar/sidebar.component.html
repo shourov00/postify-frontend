@@ -1,0 +1,19 @@
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-primary sidebar">
+  <a href="/" class="d-flex align-items-center mb-3 mt-2 mb-md-0 gap-2 me-md-auto text-white text-decoration-none">
+    <span class="icon-wrapper rounded-2 d-flex align-items-center justify-content-center">
+      <i class="bi bi-vector-pen text-primary fs-4 logo-icon"></i>
+    </span>
+    <h3 class="fs-1 app-name">Postify</h3>
+  </a>
+
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li *ngFor="let menu of menuApp" class="rounded mb-1" [ngClass]="{ 'active': isLinkActive(menu.url) }">
+      <a href="{{menu.url}}" class="nav-link d-flex align-items-center" >
+        <i class="bi {{menu.icon}} me-3"></i>
+        <span>{{menu.title}}</span>
+      </a>
+    </li>
+  </ul>
+
+  <p class="version text-center">Version {{appVersion}}</p>
+</div>

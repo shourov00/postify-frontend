@@ -4,6 +4,7 @@
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "strict": true,
+    "baseUrl": "./",
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
@@ -23,8 +24,15 @@
       "dom"
     ],
     "paths": {
-      "@app/*": ["./src/app/*"],
-      "@environments/*": ["./src/environments/*"],
+      "@services/*": [
+        "src/app/services/*"
+      ],
+      "@env/*": [
+        "src/environments/*"
+      ],
+      "@utility/*": [
+        "src/app/shared/utility/*"
+      ]
     }
   },
   "angularCompilerOptions": {

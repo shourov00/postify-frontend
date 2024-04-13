@@ -1,0 +1,48 @@
+.sidebar {
+  height: 100vh;
+  width: 280px;
+
+  .icon-wrapper {
+    width: 45px;
+    background-color: var(--bs-yellow);
+    height: 45px;
+
+    .logo-icon {
+      -webkit-text-stroke: 1px;
+    }
+  }
+
+  .nav {
+    margin-top: 5rem;
+    li {
+      transition: all 0.1s;
+
+      a {
+        font-weight: 500;
+        padding: 0.7rem 1rem;
+        color:var(--bs-white);
+
+        i {
+          font-size: 20px;
+        }
+      }
+
+      &:hover, &.active {
+        a {
+          color: var(--bs-primary);
+        }
+        background-color: var(--bs-danger);
+      }
+    }
+  }
+
+  .app-name {
+    font-weight: 600;
+    margin: 0;
+    color: var(--bs-gray-300);
+  }
+
+  .version {
+    color: var(--bs-gray-dark);
+  }
+}
