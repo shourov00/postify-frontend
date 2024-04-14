@@ -1,20 +1,31 @@
-import { Component, Input } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
+import { AsyncPipe, DecimalPipe } from '@angular/common';
+import { PostsFacade } from '@store/posts/posts.facade';
+import { AlbumsFacade } from '@store/albums/albums.facade';
+import { ToastrService } from 'ngx-toastr';
+import { PhotosFacade } from '@store/photos/photos.facade';
 
 @Component({
   selector: 'app-statistics',
   standalone: true,
-  imports: [DecimalPipe],
+  imports: [DecimalPipe, AsyncPipe],
   templateUrl: './statistics.component.html',
   styleUrl: './statistics.component.scss'
 })
-export class StatisticsComponent {
-  @Input()
-  totalPosts: number = 0;
+export class StatisticsComponent implements OnInit {
+  readonly postsFacade: PostsFacade = inject(PostsFacade);
+  readonly albumsFacade: AlbumsFacade = inject(AlbumsFacade);
+  readonly photosFacade: PhotosFacade = inject(PhotosFacade);
 
-  @Input()
-  totalAlbums: number = 0;
+  constructor(private toastr: ToastrService) {
+    this.albumsFacade.error$.subscribe((error: string | null) => {
+      if (error) {
+        this.toastr.error(error);
+      }
+    });
+  }
 
-  @Input()
-  totalPhotos: number = 0;
+  ngOnInit() {
+    this.albumsFacade.loadAlbums({ _page: 1, _limit: 1 });
+  }
 }

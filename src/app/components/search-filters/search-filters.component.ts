@@ -12,7 +12,7 @@ import { User } from '@services/user/user.model';
 })
 export class SearchFiltersComponent {
   @Input()
-  users: User[] = [];
+  users: User[] | null = null;
 
   @Input()
   searchText: string = '';

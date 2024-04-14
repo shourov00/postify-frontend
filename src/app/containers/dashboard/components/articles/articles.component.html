@@ -1,4 +1,4 @@
-<ng-container *ngIf="posts.length > 0; else noPostsTemplate">
+<ng-container *ngIf="(postsFacade.postsRes$ | async)?.posts!.length > 0; else noPostsTemplate">
     <div class="p-3 rounded-4 bg-light">
         <div class="d-flex flex-column gap-2">
             <div class="mt-2 d-flex justify-content-between align-items-center">
@@ -11,7 +11,7 @@
             </div>
 
             <div class="articles">
-                <div class="row mt-4 mt-lg-3 w-100" *ngFor="let post of posts; trackBy: trackByPost">
+                <div class="row mt-4 mt-lg-3 w-100" *ngFor="let post of (postsFacade.postsRes$ | async)?.posts; trackBy: trackByPost">
                     <div class="col-lg-8">
                         <div class="d-flex align-items-start gap-4">
                             <div class="fs-5 text-gray fw-semibold">

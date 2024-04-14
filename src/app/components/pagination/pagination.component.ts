@@ -1,6 +1,6 @@
-import {Component, EventEmitter, inject, Inject, Input, OnInit, Output} from '@angular/core';
-import {DOCUMENT, NgClass, NgForOf, NgIf, NgSwitch} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import { Component, EventEmitter, inject, Inject, Input, OnInit, Output } from '@angular/core';
+import { DOCUMENT, NgClass, NgForOf, NgIf, NgSwitch } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import {
   NgbPagination,
   NgbPaginationEllipsis,
@@ -10,12 +10,9 @@ import {
   NgbPaginationNumber,
   NgbPaginationPrevious
 } from '@ng-bootstrap/ng-bootstrap';
-import {environment} from '@env/environment';
-import {AppState, ScreenModeResolution} from '@store/core/models/core.models';
-import {selectScreenModeResolution} from "@store/core/core.selectors";
-import {select, Store} from '@ngrx/store';
-import {Observable} from "rxjs";
-import {CoreFacade} from "@store/core/core.facade";
+import { environment } from '@env/environment';
+import { ScreenModeResolution } from '@store/core/models/core.models';
+import { CoreFacade } from '@store/core/core.facade';
 
 @Component({
   selector: 'app-pagination',
@@ -53,10 +50,8 @@ export class PaginationComponent implements OnInit {
 
   mode?: ScreenModeResolution;
 
-  constructor(
-    @Inject(DOCUMENT) private document: Document
-  ) {
-    this.coreFacade.mode$.subscribe((mode: ScreenModeResolution) => this.mode = mode)
+  constructor(@Inject(DOCUMENT) private document: Document) {
+    this.coreFacade.mode$.subscribe((mode: ScreenModeResolution) => (this.mode = mode));
   }
 
   ngOnInit(): void {

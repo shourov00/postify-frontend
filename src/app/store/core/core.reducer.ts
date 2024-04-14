@@ -11,7 +11,13 @@ import { screenModeFromWidth } from '@utility/screen-size-utility';
 
 import * as CoreActions from './core.actions';
 import { usersReducer } from '@store/users/users.reducer';
-import {UserState} from "@store/users/models/users.model";
+import { UserState } from '@store/users/models/users.model';
+import { postsReducer } from '@store/posts/posts.reducer';
+import { PostState } from '@store/posts/models/posts.model';
+import { albumsReducer } from '@store/albums/albums.reducer';
+import { AlbumState } from '@store/albums/models/albums.model';
+import { photosReducer } from '@store/photos/photos.reducer';
+import { PhotoState } from '@store/photos/models/photos.model';
 
 export const initialState: InfoState = {
   screenModeResolution: screenModeFromWidth(window.innerWidth),
@@ -34,8 +40,14 @@ export const reducer: ActionReducer<InfoState> = createReducer(
 // combine reducer
 export const reducers: ActionReducerMap<AppState> = {
   core: reducer,
-  users: usersReducer
+  users: usersReducer,
+  posts: postsReducer,
+  albums: albumsReducer,
+  photos: photosReducer
 };
 
 export const selectCoreFeature: MemoizedSelector<AppState, InfoState> = createFeatureSelector('core');
 export const selectUsersFeature: MemoizedSelector<AppState, UserState> = createFeatureSelector('users');
+export const selectPostsFeature: MemoizedSelector<AppState, PostState> = createFeatureSelector('posts');
+export const selectAlbumsFeature: MemoizedSelector<AppState, AlbumState> = createFeatureSelector('albums');
+export const selectPhotosFeature: MemoizedSelector<AppState, PhotoState> = createFeatureSelector('photos');
