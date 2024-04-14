@@ -17,5 +17,15 @@
       opacity: 80%;
     }
   }
+
+  @media (max-width: 1366px) {
+    .photos {
+      max-height: calc(100vh - 540px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    max-height: 490px;
+  }
 }
 

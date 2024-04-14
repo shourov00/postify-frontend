@@ -1,6 +1,6 @@
 header {
-  width: calc(100% - 280px);
   z-index: 999;
+  width: 100%;
 
   form {
     position: relative;
@@ -25,6 +25,32 @@ header {
     .search-icon {
       position: absolute;
       left: 10px;
+    }
+  }
+}
+
+// FOR MOBILE AND SMALL TABLET
+@media (max-width: 768px) {
+  header {
+    form {
+      .search-input {
+        width: 200px !important;
+        min-width: auto !important;
+      }
+    }
+  }
+}
+
+
+// FOR LAPTOP AND UP
+@media (min-width: 992px) {
+  header {
+    &.width-collapse {
+      width: calc(100% - 84px);
+    }
+
+    &.width-expand {
+      width: calc(100% - 280px);
     }
   }
 }

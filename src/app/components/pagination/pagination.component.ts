@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NgClass, NgForOf, NgIf, NgSwitch } from '@angular/common';
+import {Component, EventEmitter, HostListener, Inject, Input, OnInit, Output} from '@angular/core';
+import { DOCUMENT, NgClass, NgForOf, NgIf, NgSwitch } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
   NgbPagination,
@@ -31,7 +31,7 @@ import {
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.scss'
 })
-export class PaginationComponent {
+export class PaginationComponent implements OnInit{
   @Input()
   currentPage: number = 1;
 
@@ -43,7 +43,19 @@ export class PaginationComponent {
 
   @Output() newPageNumber = new EventEmitter<number>();
 
-  constructor() {}
+  isMobile: boolean = false;
+
+  constructor(@Inject(DOCUMENT) private document: Document) {}
+
+ ngOnInit() {
+   const screenWidth = this.document.documentElement.clientWidth;
+   this.isMobile = screenWidth <= 768;
+ }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.isMobile = (event.target as Window).innerWidth < 768;
+  }
 
   handlePageChange(page: number): void {
     this.newPageNumber.emit(page);

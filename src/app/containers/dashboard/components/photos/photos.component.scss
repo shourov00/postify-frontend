@@ -6,3 +6,15 @@
     height: 100px;
   }
 }
+
+@media (max-width: 1366px) {
+  .photos {
+    max-height: calc(100vh - 600px);
+  }
+}
+
+@media (max-width: 768px) {
+  .photos {
+    max-height: 430px;
+  }
+}

@@ -1,13 +1,13 @@
-<ngx-spinner  bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#eee" type="square-jelly-box" [fullScreen] = "true">
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#eee" type="square-jelly-box" [fullScreen]="true">
 </ngx-spinner>
 
 <div class="d-flex h-100 w-100">
-  <app-header/>
-  <app-sidebar [appTitle]="title"/>
+    <app-header [appTitle]="title" [isCollapse]="isCollapse" (collapseValue)="setCollapse($event)"/>
+    <app-sidebar [appTitle]="title" [isCollapse]="isCollapse" />
 
-  <div class="d-flex flex-column w-100 flex-grow-1 p-4 main-container">
-    <router-outlet/>
-  </div>
+    <div class="d-flex flex-column w-100 flex-grow-1 p-4 main-container">
+        <router-outlet/>
+    </div>
 </div>
 
 

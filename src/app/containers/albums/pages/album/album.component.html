@@ -5,7 +5,7 @@
         <div class="d-flex flex-column gap-2">
             <div class="my-2">
                 <h3 class="fs-1 fw-bold">{{album.title}}</h3>
-                <p>Created By: <span class="fw-semibold">{{findUserById(album.userId)?.name}}</span></p>
+                <p>Created By: <a routerLink="/users/{{album.userId}}" class="fw-semibold">{{findUserById(album.userId)?.name}}</a></p>
             </div>
 
             <app-search-filters [itemsPerPage]="itemsPerPage" [searchText]="searchText" [users]="users"

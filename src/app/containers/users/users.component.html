@@ -21,8 +21,8 @@
                     </thead>
                     <tbody>
                     <tr *ngFor="let user of users; trackBy trackByUser">
-                        <td><a routerLink="/users/{{user.id}}">{{ user.id }}</a></td>
-                        <td>{{ user.username }}</td>
+                        <td>{{ user.id }}</td>
+                        <td><a routerLink="/users/{{user.id}}">{{ user.username }}</a></td>
                         <td><a routerLink="/users/{{user.id}}">{{ user.name }}</a></td>
                         <td>{{ user.email }}</td>
                         <td>{{ user.phone }}</td>

@@ -1,5 +1,5 @@
 <ng-container *ngIf="photos.length > 0; else noPhotosTemplate">
-    <div class="p-3 rounded-4 bg-light">
+    <div class="p-3 rounded-4 bg-light mb-4 mb-md-0">
         <div class="d-flex flex-column gap-2">
             <div class="mt-2 d-flex justify-content-between align-items-center">
                 <h3 class="fs-3 fw-bold">Recent Photos</h3>
@@ -12,7 +12,7 @@
 
             <div class="photos">
                 <div class="row mt-2 w-100 g-3">
-                    <div routerLink="/photos/{{photo.id}}" class="col-sm customer-link"
+                    <div routerLink="/photos/{{photo.id}}" class="col col-md-4 customer-link"
                          *ngFor="let photo of photos; trackBy: trackByPhoto">
                         <img class="photo rounded-4" [src]="photo.thumbnailUrl" [alt]="photo.title">
                     </div>

@@ -1,21 +1,50 @@
-<div class="d-flex sidebar-wrapper">
-  <div class="d-flex flex-column flex-grow-1 p-3 text-white bg-primary sidebar position-fixed top-0 start-0">
-    <a routerLink="/" class="d-flex align-items-center mb-3 mt-2 mb-md-0 gap-2 me-md-auto text-white text-decoration-none">
+<div class="d-lg-flex sidebar-wrapper d-none " [style.width]="isCollapse ? '84px' : '280px'">
+    <div class="d-flex flex-column flex-grow-1 p-3 text-white bg-primary sidebar position-fixed top-0 start-0"
+         [style.width]="isCollapse ? '84px' : '280px'">
+        <a routerLink="/"
+           class="d-flex align-items-center mb-3 mt-2 mb-md-0 gap-2 me-md-auto text-white text-decoration-none">
     <span class="icon-wrapper rounded-2 d-flex align-items-center justify-content-center">
       <i class="bi bi-vector-pen text-primary fs-4 logo-icon"></i>
     </span>
-      <h3 class="fs-1 app-name">{{appTitle}}</h3>
-    </a>
-
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li *ngFor="let menu of menuApp" class="rounded mb-1" [ngClass]="{ 'active': isLinkActive(menu.url) }">
-        <a routerLink="{{menu.url}}" class="nav-link d-flex align-items-center">
-          <i class="bi {{menu.icon}} me-3"></i>
-          <span>{{menu.title}}</span>
+            <h3 *ngIf="!isCollapse" class="fs-1 app-name">{{appTitle}}</h3>
         </a>
-      </li>
-    </ul>
 
-    <p class="version text-center">Version {{appVersion}}</p>
-  </div>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li *ngFor="let menu of menuApp" class="rounded mb-1" [ngClass]="{ 'active': isLinkActive(menu.url) }">
+                <a routerLink="{{menu.url}}" class="nav-link d-flex align-items-center">
+                    <i class="bi {{menu.icon}}"></i>
+                    <span class="ms-3" *ngIf="!isCollapse">{{menu.title}}</span>
+                </a>
+            </li>
+        </ul>
+
+        <p *ngIf="!isCollapse" class="version text-center">Version {{appVersion}}</p>
+    </div>
+</div>
+
+
+<!-- MOBILE SIDEBAR -->
+<div class="d-block d-lg-none offcanvas offcanvas-start bg-primary text-white" tabindex="-1" id="sidebarOffCanvas"
+     aria-labelledby="sidebarOffCanvasLabel">
+    <div class="d-flex flex-column flex-grow-1 p-3 sidebar">
+        <a routerLink="/"
+           class="d-flex align-items-center mb-3 mt-2 mb-md-0 gap-2 me-md-auto text-white text-decoration-none"
+           data-bs-dismiss="offcanvas">
+            <span class="icon-wrapper rounded-2 d-flex align-items-center justify-content-center">
+              <i class="bi bi-vector-pen text-primary fs-4 logo-icon"></i>
+            </span>
+            <h3 class="fs-1 app-name">{{appTitle}}</h3>
+        </a>
+
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li *ngFor="let menu of menuApp" class="rounded mb-1" [ngClass]="{ 'active': isLinkActive(menu.url) }">
+                <a routerLink="{{menu.url}}" class="nav-link d-flex align-items-center" data-bs-dismiss="offcanvas">
+                    <i class="bi {{menu.icon}}"></i>
+                    <span class="ms-3">{{menu.title}}</span>
+                </a>
+            </li>
+        </ul>
+
+        <p class="version text-center">Version {{appVersion}}</p>
+    </div>
 </div>

@@ -11,8 +11,8 @@
             </div>
 
             <div class="articles">
-                <div class="row mt-3 w-100" *ngFor="let post of posts; trackBy: trackByPost">
-                    <div class="col-md-8">
+                <div class="row mt-4 mt-lg-3 w-100" *ngFor="let post of posts; trackBy: trackByPost">
+                    <div class="col-lg-8">
                         <div class="d-flex align-items-start gap-4">
                             <div class="fs-5 text-gray fw-semibold">
                                 {{post.id < 10 ? '0' + post.id : post.id}}
@@ -23,17 +23,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="row">
-                            <div class="col-sm-4 d-flex gap-3 fw-bold align-items-center">
+                    <div class="col-lg-4">
+                        <div class="row mt-2 mt-md-0">
+                            <div class="col-4 d-flex gap-3 fw-bold align-items-center">
                                 <i class="bi bi-eye-fill text-danger fs-5"></i>
                                 <span>{{post.views | kiloMega}}</span>
                             </div>
-                            <div class="col-sm-4 d-flex gap-3 fw-bold align-items-center">
+                            <div class="col-4 d-flex gap-3 fw-bold align-items-center">
                                 <i class="bi bi-hand-thumbs-up-fill text-danger fs-5"></i>
                                 <span>{{post.likeCount | kiloMega}}</span>
                             </div>
-                            <div class="col-sm-4 d-flex gap-3 fw-bold align-items-center">
+                            <div class="col-4 d-flex gap-3 fw-bold align-items-center">
                                 <i class="bi bi-share-fill text-danger fs-5"></i>
                                 <span>{{post.shareCount | kiloMega}}</span>
                             </div>

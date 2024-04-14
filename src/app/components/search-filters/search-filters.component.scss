@@ -1,5 +1,5 @@
 .search-filters {
-  .search-input, .filter-select {
+  .search-input, .filter-select, .items-filter {
     width: 350px;
 
     input, select {
@@ -8,7 +8,6 @@
       font-weight: 300;
       font-size: 14px;
       padding: 0.7rem 1rem 0.7rem 2.5rem;
-      min-width: 300px;
 
       &::placeholder {
         color: var(--bs-primary)
@@ -36,9 +35,19 @@
   }
 
   .items-filter {
+    width: 150px;
     select {
-      box-shadow: none;
-      border: 1px solid var(--bs-info);
+      padding-left: 10px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .search-input, .filter-select, .items-filter {
+      width: auto;
+
+      input, select {
+        min-width: 150px;
+      }
     }
   }
 }

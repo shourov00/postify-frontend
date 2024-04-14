@@ -13,4 +13,12 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 })
 export class AppComponent {
   title = 'Postify';
+
+  isCollapse: boolean = false;
+
+  constructor() {}
+
+  setCollapse(value: boolean): void {
+    this.isCollapse = value;
+  }
 }

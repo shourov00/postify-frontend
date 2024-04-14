@@ -7,13 +7,12 @@
             <p>Here's a list of all the posts.</p>
         </div>
 
-        <div class="posts-table table-responsive" *ngIf="postsRes?.posts">
+        <app-search-filters [itemsPerPage]="itemsPerPage" [searchText]="searchText" [users]="users"
+                            [selectedUserId]="selectedUserId" (newItemsPerPage)="onItemsPerPageSelected($event)"
+                            (newSearchInput)="onSearchInput($event)" (newUserSelected)="onUserSelected($event)"/>
 
-            <app-search-filters [itemsPerPage]="itemsPerPage" [searchText]="searchText" [users]="users"
-                                [selectedUserId]="selectedUserId" (newItemsPerPage)="onItemsPerPageSelected($event)"
-                                (newSearchInput)="onSearchInput($event)" (newUserSelected)="onUserSelected($event)"/>
-
-            <ng-container *ngIf="postsRes && postsRes.total > 0; else noPostsTemplate">
+        <ng-container *ngIf="postsRes && postsRes.total > 0; else noPostsTemplate">
+            <div class="posts-table table-responsive">
                 <table class="table table-striped">
                     <thead>
                     <tr>
@@ -31,7 +30,7 @@
                     <tbody>
                     <tr *ngFor="let post of postsRes?.posts; trackBy trackByPost">
                         <td>{{ post.id }}</td>
-                        <td style="width: 250px">
+                        <td style="min-width: 150px">
                             <a routerLink="/users/{{post.userId}}"
                                class="la-cube-transition">{{ findUserById(post.userId)?.name || 'User ' + post.userId}}</a>
                         </td>
@@ -43,12 +42,10 @@
                     </tr>
                     </tbody>
                 </table>
-
-                <app-pagination [currentPage]="currentPage" [itemsPerPage]="itemsPerPage" [lastPage]="lastPage"
-                                (newPageNumber)="onPageChange($event)"/>
-            </ng-container>
-        </div>
-
+            </div>
+            <app-pagination [currentPage]="currentPage" [itemsPerPage]="itemsPerPage" [lastPage]="lastPage"
+                            (newPageNumber)="onPageChange($event)"/>
+        </ng-container>
     </div>
 </div>
 

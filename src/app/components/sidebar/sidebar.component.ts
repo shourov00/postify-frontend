@@ -1,18 +1,21 @@
-import { Component, Input } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { Menu, MenuApp } from '../../shared/models/Menu';
-import { NgClass, NgForOf } from '@angular/common';
+import {NgClass, NgForOf, NgIf} from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [NgForOf, NgClass, RouterLink],
+  imports: [NgForOf, NgClass, RouterLink, NgIf],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
   @Input()
   appTitle: string = '';
+
+  @Input()
+  isCollapse: boolean = false;
 
   appVersion: string;
   menuApp: Menu[];
