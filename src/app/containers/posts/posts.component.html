@@ -17,10 +17,10 @@
         <table class="table table-striped">
           <thead>
           <tr>
-            <th>Id <i class="bi bi-arrow-down-up ms-2 sort" (click)="toggleSort('id')"></i></th>
-            <th>Published By <i class="bi bi-arrow-down-up ms-2 sort" (click)="toggleSort('userId')"></i></th>
-            <th>Title <i class="bi bi-arrow-down-up ms-2 sort" (click)="toggleSort('title')"></i></th>
-            <th>Content <i class="bi bi-arrow-down-up ms-2 sort" (click)="toggleSort('body')"></i></th>
+            <th (click)="toggleSort('id')">Id <i *ngIf="sortedColumn === 'id'" class="bi bi-arrow-down-up ms-2 sort"></i></th>
+            <th (click)="toggleSort('userId')">Published By <i *ngIf="sortedColumn === 'userId'" class="bi bi-arrow-down-up ms-2 sort" ></i></th>
+            <th (click)="toggleSort('title')">Title <i *ngIf="sortedColumn === 'title'" class="bi bi-arrow-down-up ms-2 sort" ></i></th>
+            <th (click)="toggleSort('body')">Content <i *ngIf="sortedColumn === 'body'" class="bi bi-arrow-down-up ms-2 sort" ></i></th>
           </tr>
           </thead>
           <tbody>
