@@ -14,6 +14,7 @@ import { QueryLocalParams, QueryParams } from '@services/api/api.model';
 import { debounceTime } from 'rxjs/operators';
 import { AlbumService } from '@services/album/album.service';
 import { SearchFiltersComponent } from '../../components/search-filters/search-filters.component';
+import {environment} from "@env/environment";
 
 @Component({
   selector: 'app-albums',
@@ -47,7 +48,7 @@ export class AlbumsComponent implements OnInit {
   // PAGINATION
   currentPage: number = 1;
   lastPage: number = 1;
-  itemsPerPage: number = 10;
+  itemsPerPage: number = environment.elementsPerPage;
 
   // SEARCHING
   searchText: string = '';

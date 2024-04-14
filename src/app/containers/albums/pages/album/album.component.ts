@@ -15,6 +15,7 @@ import { Photo, PhotosRes } from '@services/photo/photo.model';
 import { forkJoin, Observable, Subject } from 'rxjs';
 import { PhotoService } from '@services/photo/photo.service';
 import { QueryLocalParams, QueryParams } from '@services/api/api.model';
+import {environment} from "@env/environment";
 
 @Component({
   selector: 'app-album',
@@ -41,7 +42,7 @@ export class AlbumComponent implements OnInit {
   // PAGINATION
   currentPage: number = 1;
   lastPage: number = 1;
-  itemsPerPage: number = 10;
+  itemsPerPage: number = environment.elementsPerPage;
 
   // SEARCHING
   searchText: string = '';

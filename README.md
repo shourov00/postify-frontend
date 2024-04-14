@@ -9,7 +9,7 @@ It allows users to interact with placeholder data in a visually appealing way.
 This project was generated with Angular CLI version 17.3.4.
 
 ## Demo
-Check out the [demo!](https://jsonplaceholder.typicode.com/)
+Check out the [demo!](https://postify-ng.netlify.app/)
 
 
 ## Start server using docker

@@ -10,6 +10,7 @@ import {
   NgbPaginationNumber,
   NgbPaginationPrevious
 } from '@ng-bootstrap/ng-bootstrap';
+import {environment} from "@env/environment";
 
 @Component({
   selector: 'app-pagination',
@@ -39,7 +40,7 @@ export class PaginationComponent implements OnInit{
   lastPage: number = 1;
 
   @Input()
-  itemsPerPage: number = 10;
+  itemsPerPage: number = environment.elementsPerPage;
 
   @Output() newPageNumber = new EventEmitter<number>();
 
