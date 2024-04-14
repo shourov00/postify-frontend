@@ -34,7 +34,7 @@ import { CoreFacade } from '@store/core/core.facade';
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.scss'
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent {
   private readonly coreFacade: CoreFacade = inject(CoreFacade);
 
   @Input()
@@ -52,10 +52,6 @@ export class PaginationComponent implements OnInit {
 
   constructor(@Inject(DOCUMENT) private document: Document) {
     this.coreFacade.mode$.subscribe((mode: ScreenModeResolution) => (this.mode = mode));
-  }
-
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
 
   handlePageChange(page: number): void {

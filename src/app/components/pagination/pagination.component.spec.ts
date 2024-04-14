@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 
 import { PaginationComponent } from './pagination.component';
+import {CoreFacade} from "@store/core/core.facade";
+import {BehaviorSubject} from "rxjs";
+import {ScreenModeResolution} from "@store/core/models/core.models";
 
 describe('PaginationComponent', () => {
   let component: PaginationComponent;
@@ -8,7 +12,10 @@ describe('PaginationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PaginationComponent]
+      imports: [PaginationComponent],
+      providers: [
+        { provide: CoreFacade, useValue: { mode$: new BehaviorSubject<ScreenModeResolution>(ScreenModeResolution.Large) } }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(PaginationComponent);

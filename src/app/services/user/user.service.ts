@@ -3,10 +3,8 @@ import { forkJoin, map, Observable, of, switchMap } from 'rxjs';
 import { environment } from '@env/environment';
 import { User } from '@services/user/user.model';
 import { ApiService } from '@services/api/api.service';
-import { HttpResponse } from '@angular/common/http';
-import { Album, AlbumsRes } from '@services/album/album.model';
-import { Photo, PhotosRes } from '@services/photo/photo.model';
-import { Post, PostsRes } from '@services/post/post.model';
+import { Album } from '@services/album/album.model';
+import { Post } from '@services/post/post.model';
 
 @Injectable({
   providedIn: 'root'

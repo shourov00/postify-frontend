@@ -7,7 +7,7 @@ import {
   on
 } from '@ngrx/store';
 import { AppState, InfoState } from './models/core.models';
-import { screenModeFromWidth } from '@utility/screen-size-utility';
+import { screenModeFromWidth } from '@utils/screen-size-utils';
 
 import * as CoreActions from './core.actions';
 import { usersReducer } from '@store/users/users.reducer';

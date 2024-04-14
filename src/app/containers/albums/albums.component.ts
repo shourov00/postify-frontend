@@ -100,6 +100,7 @@ export class AlbumsComponent implements OnInit {
   }
 
   loadAlbums({ page, limit, search, userId }: QueryLocalParams): void {
+    console.log('called')
     this.spinner.show();
 
     const queryParams: QueryParams = {

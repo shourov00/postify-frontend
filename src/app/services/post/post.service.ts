@@ -3,7 +3,7 @@ import { map, Observable } from 'rxjs';
 import { Post, PostsRes } from '@services/post/post.model';
 import { QueryParams } from '@services/api/api.model';
 import { environment } from '@env/environment';
-import { randomDate, randomNumber } from '@utility/date-utils';
+import { randomDate, randomNumber } from '@utils/date-utils';
 import { HttpResponse } from '@angular/common/http';
 import { ApiService } from '@services/api/api.service';
 
