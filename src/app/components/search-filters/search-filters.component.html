@@ -1,0 +1,26 @@
+<div class="d-flex gap-4 search-filters">
+    <div class="d-flex align-items-center gap-2 position-relative mb-3 items-filter">
+        <select class="form-select" [(ngModel)]="itemsPerPage" (change)="onItemsPerPageSelected()">
+            <option value="" disabled selected>Items</option>
+            <option *ngFor="let item of [10, 20, 50]" [value]="item">{{ item }}</option>
+        </select>
+    </div>
+
+    <div class="d-flex align-items-center gap-2 position-relative mb-3 search-input">
+        <i class="bi bi-search text-primary search-icon"></i>
+        <input type="text" class="form-control " placeholder="Search by title" [(ngModel)]="searchText"
+               (input)="onSearchInput($event)">
+        <i class="bi bi-x-circle close-icon" (click)="clearSearch()" [hidden]="!searchText"></i>
+    </div>
+
+    <ng-container *ngIf="isFilter">
+        <div class="d-flex align-items-center gap-2 position-relative mb-3 filter-select">
+            <i class="bi bi-funnel text-primary search-icon"></i>
+            <select class="form-select" [(ngModel)]="selectedUserId" (change)="onUserSelected()">
+                <option value="" disabled selected>Filter by user</option>
+                <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
+            </select>
+            <i class="bi bi-x-circle close-icon ms-auto" (click)="clearFilter()" [hidden]="!selectedUserId"></i>
+        </div>
+    </ng-container>
+</div>

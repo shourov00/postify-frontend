@@ -9,7 +9,13 @@ import { Options } from './api.model';
 export class ApiService {
   constructor(private httpClient: HttpClient) {}
 
+  // get data response object
   get<T>(url: string, options: Options): Observable<HttpResponse<T>> {
     return this.httpClient.get<T>(url, options) as Observable<HttpResponse<T>>;
+  }
+
+  // get data only
+  getBody<T>(url: string, options?: Options): Observable<T> {
+    return this.httpClient.get<T>(url, { ...options, observe: 'body' }) as Observable<T>;
   }
 }

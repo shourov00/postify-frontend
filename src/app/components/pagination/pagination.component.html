@@ -1,0 +1,10 @@
+<ngb-pagination class="mt-5 d-flex justify-content-center" [collectionSize]="(lastPage * itemsPerPage)"  [pageSize]="itemsPerPage"
+                (pageChange)="handlePageChange($event)"
+                [(page)]="currentPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true">
+    <ng-template ngbPaginationFirst>First</ng-template>
+    <ng-template ngbPaginationLast>Last</ng-template>
+    <ng-template ngbPaginationPrevious>Prev</ng-template>
+    <ng-template ngbPaginationNext>Next</ng-template>
+    <ng-template ngbPaginationEllipsis>...</ng-template>
+    <ng-template ngbPaginationNumber let-page>{{ page }}</ng-template>
+</ngb-pagination>

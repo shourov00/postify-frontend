@@ -23,9 +23,19 @@ export interface Options {
     | boolean;
 }
 
-export interface PaginationParams {
+export interface QueryParams {
   [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
 
   _page: number;
   _limit: number;
+}
+
+export interface QueryLocalParams {
+  [key: string]: string | number | undefined;
+  page?: number;
+  limit?: number;
+  search?: string;
+  userId?: string;
+  sortBy?: string;
+  order?: string;
 }

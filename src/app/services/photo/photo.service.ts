@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PaginationParams } from '@services/api/api.model';
+import { QueryParams } from '@services/api/api.model';
 import { map, Observable } from 'rxjs';
 import { environment } from '@env/environment';
 import { Photo, PhotosRes } from '@services/photo/photo.model';
@@ -12,15 +12,15 @@ import { ApiService } from '@services/api/api.service';
 export class PhotoService {
   constructor(private apiService: ApiService) {}
 
-  getPhotos = (params: PaginationParams): Observable<PhotosRes> => {
+  getPhotos = (params: QueryParams): Observable<PhotosRes> => {
     return this.apiService.get<Photo[]>(`${environment.apiUrl}/photos`, { params, observe: 'response' }).pipe(
       map((response: HttpResponse<Photo[]>) => {
         const totalCount = Number(response.headers.get('X-Total-Count')) || 0;
         return {
           total: totalCount,
           lastPage: Math.ceil(totalCount / params?._limit),
-          currentPage: params?._page,
-          perPage: params?._limit,
+          currentPage: Number(params?._page),
+          perPage: Number(params?._limit),
           photos: response.body || []
         };
       })

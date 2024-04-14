@@ -1,0 +1,55 @@
+.posts-table {
+
+  .search-input, .filter-select {
+    width: 400px;
+
+    input, select {
+      box-shadow: none;
+      border: 1px solid var(--bs-info);
+      font-weight: 300;
+      font-size: 14px;
+      padding: 0.7rem 1rem 0.7rem 2.5rem;
+      min-width: 300px;
+
+      &::placeholder {
+        color: var(--bs-primary)
+      }
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 10px;
+    }
+
+    .close-icon {
+      position: absolute;
+      right: 10px;
+      cursor: pointer;
+    }
+  }
+
+  .filter-select {
+    width: 200px;
+
+    .close-icon {
+      right: -50px;
+    }
+  }
+
+  .items-filter {
+    select {
+      box-shadow: none;
+      border: 1px solid var(--bs-info);
+    }
+  }
+
+  .sort {
+    cursor: pointer;
+  }
+
+  table {
+    td {
+      min-width: 100px
+    }
+  }
+}

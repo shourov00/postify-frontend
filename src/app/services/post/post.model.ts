@@ -1,8 +1,8 @@
 export type PostsRes = {
   total: number;
   lastPage: number;
-  currentPage?: number;
-  perPage?: number;
+  currentPage: number;
+  perPage: number;
   posts: Post[];
 };
 

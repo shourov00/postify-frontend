@@ -1,8 +1,8 @@
 export type PhotosRes = {
   total: number;
   lastPage: number;
-  currentPage?: number;
-  perPage?: number;
+  currentPage: number;
+  perPage: number;
   photos: Photo[];
 };
 

@@ -1,5 +1,6 @@
-:host(app-header) {
-  width: 100%;
+header {
+  width: calc(100% - 280px);
+  z-index: 999;
 
   form {
     position: relative;

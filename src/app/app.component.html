@@ -1,12 +1,12 @@
+<ngx-spinner  bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#eee" type="square-jelly-box" [fullScreen] = "true">
+</ngx-spinner>
+
 <div class="d-flex h-100 w-100">
-  <app-sidebar />
+  <app-header/>
+  <app-sidebar [appTitle]="appTitle"/>
 
-  <div class="d-flex flex-column w-100">
-    <app-header />
-
-    <div class="p-4">
-      <router-outlet/>
-    </div>
+  <div class="d-flex flex-column w-100 flex-grow-1 p-4 main-container">
+    <router-outlet/>
   </div>
 </div>
 

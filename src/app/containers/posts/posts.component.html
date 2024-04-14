@@ -1,0 +1,50 @@
+<app-breadcrumbs [breadcrumbs]="breadcrumbs"/>
+
+<div class="p-3 rounded-4 bg-light mb-4">
+  <div class="d-flex flex-column gap-2">
+    <div class="my-2">
+      <h3 class="fs-1 fw-bold">Posts</h3>
+      <p>Here's a list of all the posts.</p>
+    </div>
+
+    <div class="posts-table table-responsive" *ngIf="postsRes?.posts">
+
+      <app-search-filters [itemsPerPage]="itemsPerPage" [searchText]="searchText" [users]="users"
+                          [selectedUserId]="selectedUserId" (newItemsPerPage)="onItemsPerPageSelected($event)"
+                          (newSearchInput)="onSearchInput($event)" (newUserSelected)="onUserSelected($event)"/>
+
+      <ng-container *ngIf="postsRes && postsRes.total > 0; else noPostsTemplate">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Id <i class="bi bi-arrow-down-up ms-2 sort" (click)="toggleSort('id')"></i></th>
+            <th>Published By <i class="bi bi-arrow-down-up ms-2 sort" (click)="toggleSort('userId')"></i></th>
+            <th>Title <i class="bi bi-arrow-down-up ms-2 sort" (click)="toggleSort('title')"></i></th>
+            <th>Content <i class="bi bi-arrow-down-up ms-2 sort" (click)="toggleSort('body')"></i></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let post of postsRes?.posts; trackBy trackByPost">
+            <td>{{ post.id }}</td>
+            <td style="width: 250px">{{ findUserById(post.userId)?.name || 'User ' + post.userId}}</td>
+            <td>
+              <a href="/posts/{{post.id}}" class="link-opacity-50-hover la-cube-transition">{{ post.title }}</a>
+            </td>
+            <td>{{ post.body }}</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <app-pagination [currentPage]="currentPage" [itemsPerPage]="itemsPerPage" [lastPage]="lastPage"
+                        (newPageNumber)="onPageChange($event)"/>
+      </ng-container>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #noPostsTemplate>
+  <div class="my-5 text-center">
+    No posts found!
+  </div>
+</ng-template>

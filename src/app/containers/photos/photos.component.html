@@ -1,0 +1,41 @@
+<app-breadcrumbs [breadcrumbs]="breadcrumbs"/>
+
+<div class="p-3 rounded-4 bg-light mb-4">
+    <div class="d-flex flex-column gap-2">
+        <div class="my-2 ">
+            <h3 class="fs-1 fw-bold">Photos</h3>
+            <p>Here's a list of all the photos.</p>
+        </div>
+
+        <app-search-filters [itemsPerPage]="itemsPerPage" [searchText]="searchText"
+                            (newItemsPerPage)="onItemsPerPageSelected($event)"
+                            (newSearchInput)="onSearchInput($event)" [isFilter]="false"/>
+
+        <ng-container *ngIf="photosRes && photosRes.total > 0; else noPhotosTemplate">
+            <div class="row g-4 gy-5 photo-lists w-100">
+                <div class="col-2" *ngFor="let photo of photosRes?.photos; trackBy trackByPhoto">
+                    <div class="d-flex flex-column gap-1">
+                        <img class="rounded-2" [src]="photo.thumbnailUrl" [alt]="photo.title">
+                        <h4 class="fs-5 fw-semibold text-truncate">{{photo.title}}</h4>
+
+                        <button class="btn btn-danger">
+                            <a href="/posts" class="small d-flex align-items-center gap-2">
+                                View photo
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <app-pagination [currentPage]="currentPage" [itemsPerPage]="itemsPerPage" [lastPage]="lastPage"
+                            (newPageNumber)="onPageChange($event)"/>
+        </ng-container>
+    </div>
+</div>
+
+<ng-template #noPhotosTemplate>
+    <div class="my-5 text-center">
+        No photos found!
+    </div>
+</ng-template>

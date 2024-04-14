@@ -1,0 +1,12 @@
+<div class="d-flex justify-content-start align-items-center gap-2 mb-4">
+  <a href="/">
+    Dashboard
+  </a>
+  <i class="bi bi-chevron-compact-right"></i>
+
+  <ng-container *ngFor="let item of breadcrumbs; let index = index; trackBy trackByLink">
+    <a href="{{item.link}}" [class]="item.isActive && 'fw-semibold'">{{item.title}}</a>
+
+    <i class="bi bi-chevron-compact-right" *ngIf="breadcrumbs.length !== index + 1"></i>
+  </ng-container>
+</div>

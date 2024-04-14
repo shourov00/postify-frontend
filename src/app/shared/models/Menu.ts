@@ -25,7 +25,7 @@ export const MenuApp: Menu[] = [
   },
   {
     title: 'Photos',
-    url: '/albums',
+    url: '/photos',
     icon: 'bi-images'
   },
   {
