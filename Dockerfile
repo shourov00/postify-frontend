@@ -10,4 +10,6 @@ COPY . .
 
 EXPOSE 4200
 
-CMD npm start
+RUN npm install -g @angular/cli@17.3.4
+
+CMD ["ng","serve","--host", "0.0.0.0", "--disable-host-check"]
