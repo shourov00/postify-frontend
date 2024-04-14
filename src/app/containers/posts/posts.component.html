@@ -31,10 +31,13 @@
                     <tbody>
                     <tr *ngFor="let post of postsRes?.posts; trackBy trackByPost">
                         <td>{{ post.id }}</td>
-                        <td style="width: 250px">{{ findUserById(post.userId)?.name || 'User ' + post.userId}}</td>
+                        <td style="width: 250px">
+                            <a routerLink="/users/{{post.userId}}"
+                               class="la-cube-transition">{{ findUserById(post.userId)?.name || 'User ' + post.userId}}</a>
+                        </td>
                         <td>
                             <a routerLink="/posts/{{post.id}}"
-                               class="link-opacity-50-hover la-cube-transition">{{ post.title }}</a>
+                               class="la-cube-transition">{{ post.title }}</a>
                         </td>
                         <td>{{ post.body }}</td>
                     </tr>

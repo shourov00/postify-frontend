@@ -3,7 +3,7 @@
 
 /* Override bootstrap default colors */
 $primary: #232946;
-$secondary:  #444962;
+$secondary: #444962;
 $success: #bbebee;
 $info: #d4d8f0;
 $light: #f4f6ff;
@@ -40,16 +40,13 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
-a {
-  text-decoration: none;
-}
-
 h1, h2, h3, h4, h5, h6 {
   font-family: "EB Garamond", serif;
 }
 
-.custom-link {
-  transition: all 0.1s ease-in-out;
+a, .customer-link {
+  text-decoration: none;
+  transition: all 0.1s ease-in;
 
   &:hover {
     cursor: pointer;

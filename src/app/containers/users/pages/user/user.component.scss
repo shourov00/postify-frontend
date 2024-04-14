@@ -1,0 +1,25 @@
+.articles {
+  overflow-y: auto;
+  max-height: 500px;
+
+  .article-title {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+
+    &:hover {
+      opacity: 80%;
+    }
+  }
+
+  .article-body {
+    font-size: 14px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+  }
+}

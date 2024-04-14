@@ -8,6 +8,7 @@ import { User } from '@services/user/user.model';
 import { UserService } from '@services/user/user.service';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
 import { SearchFiltersComponent } from '../../components/search-filters/search-filters.component';
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-users',
@@ -20,7 +21,8 @@ import { SearchFiltersComponent } from '../../components/search-filters/search-f
     NgIf,
     NgxSpinnerModule,
     PaginationComponent,
-    SearchFiltersComponent
+    SearchFiltersComponent,
+    RouterLink
   ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'

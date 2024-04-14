@@ -14,7 +14,7 @@
     <ng-container *ngIf="albumsRes && albumsRes.total > 0; else noAlbumsTemplate">
       <div class="row g-3 albums">
         <div class="col-md-3" *ngFor="let album of albumsRes?.albums; trackBy trackByAlbum">
-          <div class="d-flex flex-column  rounded-4 border border-success p-3">
+          <div class="d-flex flex-column  rounded-4 border border-2 border-success p-3">
             <h4 class="fw-semibold text-truncate">{{album.title}}</h4>
             <div class="small">Created By <span class="fw-medium">{{findUserById(album.userId)?.name}}</span></div>
 

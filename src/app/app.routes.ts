@@ -24,6 +24,6 @@ export const routes: Routes = [
   {
     path: 'users',
     title: 'Postify | Users',
-    loadComponent: () => import('./containers/users/users.component').then(c => c.UsersComponent)
+    loadChildren: () => import('./containers/users/users.routes').then(routes => routes.UsersRoutes),
   }
 ];

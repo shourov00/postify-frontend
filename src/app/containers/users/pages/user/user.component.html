@@ -1,0 +1,70 @@
+<app-breadcrumbs [breadcrumbs]="breadcrumbs"/>
+
+<ng-container *ngIf="user">
+    <div class="p-3 rounded-4 bg-light mb-4" >
+        <div class="d-flex flex-column gap-2">
+            <div class="my-2">
+                <h1 class="fs-1 fw-bold">{{user.name}}</h1>
+                <div class="d-flex align-items-center gap-4 pt-2">
+                    <p>Username: <span class="fw-semibold">{{user.username}}</span></p>
+                    <p>Email: <span class="fw-semibold">{{user.email}}</span></p>
+                    <p>Phone: <span class="fw-semibold">{{user.phone}}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-1 gap-4">
+        <div class="p-3 rounded-4 bg-light col-md">
+            <div class="d-flex flex-column gap-2">
+                <div class="mt-2">
+                    <h3 class="fs-3 fw-bold">Posts</h3>
+                </div>
+
+                <div  *ngIf="user.posts" class="articles">
+                    <div class="mt-4 w-100 pe-3" *ngFor="let post of user.posts; let index = index;">
+                        <div class="d-flex align-items-start gap-4">
+                            <div class="fs-6 text-gray fw-semibold">
+                                {{index + 1 < 10 ? '0' + (index + 1) : index + 1}}
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between w-100 gap-4">
+                                <div class="d-flex flex-column gap-2">
+                                    <a routerLink="/posts/{{post.id}}" class="fs-6 article-title fw-semibold text-capitalize">{{post.title}}</a>
+                                    <div class="article-body text-truncate w-100">{{post.body}}</div>
+                                </div>
+                                <button routerLink="/posts/{{post.id}}" class="btn btn-primary text-danger btn-sm">
+                                    Read
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-3 rounded-4 bg-light col-md">
+            <div class="d-flex flex-column gap-2">
+                <div class="mt-2">
+                    <h3 class="fs-3 fw-bold">Albums</h3>
+                </div>
+
+                <div  *ngIf="user.albums" class="articles">
+                    <div class="mt-4 w-100 pe-3" *ngFor="let album of user.albums; let index = index;">
+                        <div class="d-flex align-items-start gap-4">
+                            <div class="fs-6 text-gray fw-semibold">
+                                {{index + 1 < 10 ? '0' + (index + 1) : index + 1}}
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between gap-2 w-100">
+                                <a routerLink="/albums/{{album.id}}" class="fs-6 article-title fw-semibold text-capitalize">{{album.title}}</a>
+
+                                <button routerLink="/albums/{{album.id}}" class="btn btn-primary text-danger btn-sm">
+                                    View
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
