@@ -1,0 +1,42 @@
+<app-breadcrumbs [breadcrumbs]="breadcrumbs"/>
+
+<div class="p-3 rounded-4 bg-light mb-4">
+    <div class="d-flex flex-column gap-2">
+        <div class="my-2">
+            <h3 class="fs-1 fw-bold">Users</h3>
+            <p>Here's a list of all users.</p>
+        </div>
+
+        <div class="posts-table table-responsive">
+            <ng-container *ngIf="users.length > 0; else noUsersTemplate">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Username</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let user of users; trackBy trackByUser">
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.phone }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </ng-container>
+        </div>
+
+    </div>
+</div>
+
+<ng-template #noUsersTemplate>
+    <div class="my-5 text-center">
+        No users found!
+    </div>
+</ng-template>

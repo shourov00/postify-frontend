@@ -16,5 +16,9 @@ export const routes: Routes = [
   {
     path: 'photos',
     loadComponent: () => import('./containers/photos/photos.component').then(c => c.PhotosComponent)
+  },
+  {
+    path: 'users',
+    loadComponent: () => import('./containers/users/users.component').then(c => c.UsersComponent)
   }
 ];

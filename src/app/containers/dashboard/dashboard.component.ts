@@ -11,6 +11,7 @@ import { PhotoService } from '@services/photo/photo.service';
 import { PhotosComponent } from './components/photos/photos.component';
 import { AlbumsRes } from '@services/album/album.model';
 import { AlbumService } from '@services/album/album.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-dashboard',
@@ -34,10 +35,12 @@ export class DashboardComponent implements OnInit {
   constructor(
     private postService: PostService,
     private photoService: PhotoService,
-    private albumService: AlbumService
+    private albumService: AlbumService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
+    this.spinner.show();
     this.postService.getPosts({ _page: 1, _limit: 10 }).subscribe((postsRes: PostsRes) => {
       this.postsRes = postsRes;
     });
@@ -49,5 +52,6 @@ export class DashboardComponent implements OnInit {
     this.albumService.getAlbums({ _page: 1, _limit: 1 }).subscribe((albumRes: AlbumsRes) => {
       this.albumRes = albumRes;
     });
+    this.spinner.hide();
   }
 }
