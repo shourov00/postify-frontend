@@ -1,10 +1,39 @@
+
+![Postify Screenshot](/postify.jpg)
+
 # Postify
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.4.
+Postify is a project that utilizes [JSONPlaceholder API](https://jsonplaceholder.typicode.com/) with a sleek UI/UX design. 
+It allows users to interact with placeholder data in a visually appealing way.
+
+This project was generated with Angular CLI version 17.3.4.
+
+## Demo
+Check out the [demo!](https://jsonplaceholder.typicode.com/)
+
+
+## Start server using docker
+
+Run docker compose to start the project using docker
+
+```bash
+docker compose up
+```
+Use docker watch to watch file changes
+
+```bash
+docker compose watch
+```
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```bash
+npm install 
+
+npm start
+```
+
+Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
@@ -21,6 +50,16 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 ## Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+
+## 🛠️ Technologies & Tools
+![](https://img.shields.io/badge/Code-JavaScript-informational?style=flat&color=informational&logo=typescript)
+![](https://img.shields.io/badge/Code-React-informational?style=flat&color=informational&logo=angular)
+![](https://img.shields.io/badge/Code-Node-informational?style=flat&color=informational&logo=node.js)
+![](https://img.shields.io/badge/Tool-Jest-informational?style=flat&color=warning&logo=jest)
+![](https://img.shields.io/badge/Tool-SCSS-informational?style=flat&color=warning&logo=sass)
+![](https://img.shields.io/badge/Tool-Docker-informational?style=flat&color=warning&logo=docker)
+
 
 ## Further help
 
