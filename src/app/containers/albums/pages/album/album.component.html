@@ -1,0 +1,36 @@
+<app-breadcrumbs [breadcrumbs]="breadcrumbs"/>
+
+<ng-container *ngIf="album">
+    <div class="p-3 rounded-4 bg-light mb-4" style="min-height: calc(100vh - 175px)">
+        <div class="d-flex flex-column gap-2">
+            <div class="my-2">
+                <h3 class="fs-1 fw-bold">{{album.title}}</h3>
+                <p>Created By: <span class="fw-semibold">{{findUserById(album.userId)?.name}}</span></p>
+            </div>
+
+            <app-search-filters [itemsPerPage]="itemsPerPage" [searchText]="searchText" [users]="users"
+                                (newItemsPerPage)="onItemsPerPageSelected($event)"
+                                (newSearchInput)="onSearchInput($event)" [isFilter]="false"/>
+
+            <ng-container *ngIf="photosRes && photosRes.total > 0; else noPhotosTemplate">
+                <div class="row g-4">
+                    <div class="col-md-2 mb-2" *ngFor="let photo of photosRes?.photos; trackBy trackByPhoto">
+                        <img class="w-100 rounded-4" [src]="photo.thumbnailUrl" [alt]="photo.title">
+                        <div routerLink="/photos/{{photo.id}}"
+                             class="text-truncate mt-2 fw-medium w-100 custom-link">{{photo.title}}</div>
+                    </div>
+                </div>
+
+
+                <app-pagination [currentPage]="currentPage" [itemsPerPage]="itemsPerPage" [lastPage]="lastPage"
+                                (newPageNumber)="onPageChange($event)"/>
+            </ng-container>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #noPhotosTemplate>
+    <div class="my-5 text-center">
+        No photos found!
+    </div>
+</ng-template>

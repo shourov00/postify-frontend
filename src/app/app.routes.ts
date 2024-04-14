@@ -3,22 +3,27 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
+    title: 'Postify | Dashboard',
     loadComponent: () => import('./containers/dashboard/dashboard.component').then(c => c.DashboardComponent)
   },
   {
     path: 'posts',
-    loadComponent: () => import('./containers/posts/posts.component').then(c => c.PostsComponent)
+    title: 'Postify | Posts',
+    loadChildren: () => import('./containers/posts/posts.routes').then(routes => routes.PostsRoutes)
   },
   {
     path: 'albums',
-    loadComponent: () => import('./containers/albums/albums.component').then(c => c.AlbumsComponent)
+    title: 'Postify | Albums',
+    loadChildren: () => import('./containers/albums/albums.routes').then(routes => routes.AlbumsRoutes),
   },
   {
     path: 'photos',
-    loadComponent: () => import('./containers/photos/photos.component').then(c => c.PhotosComponent)
+    title: 'Postify | Photos',
+    loadChildren: () => import('./containers/photos/photos.routes').then(routes => routes.PhotosRoutes),
   },
   {
     path: 'users',
+    title: 'Postify | Users',
     loadComponent: () => import('./containers/users/users.component').then(c => c.UsersComponent)
   }
 ];

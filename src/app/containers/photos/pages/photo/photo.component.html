@@ -1,0 +1,20 @@
+<app-breadcrumbs [breadcrumbs]="breadcrumbs"/>
+
+<ng-container *ngIf="photo">
+    <div class="p-3 rounded-4 bg-light mb-4" style="min-height: calc(100vh - 175px)">
+        <div class="d-flex flex-column gap-2">
+            <div class="my-2">
+                <h3 class="fs-1 fw-bold">{{photo.title}}</h3>
+
+                <button routerLink="/albums/{{photo.albumId}}" class="mt-2 btn btn-primary text-danger">
+                    View Full Album
+                    <i class="bi bi-arrow-right ms-2"></i>
+                </button>
+            </div>
+
+            <div class="text-center mt-4">
+                <img class="rounded-4 photo-item" [src]="photo.url" [alt]="photo.title">
+            </div>
+        </div>
+    </div>
+</ng-container>

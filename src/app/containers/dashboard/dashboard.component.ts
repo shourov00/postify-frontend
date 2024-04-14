@@ -12,6 +12,7 @@ import { PhotosComponent } from './components/photos/photos.component';
 import { AlbumsRes } from '@services/album/album.model';
 import { AlbumService } from '@services/album/album.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { forkJoin, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -41,17 +42,19 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
-    this.postService.getPosts({ _page: 1, _limit: 10 }).subscribe((postsRes: PostsRes) => {
-      this.postsRes = postsRes;
-    });
 
-    this.photoService.getPhotos({ _page: 1, _limit: 20 }).subscribe((photosRes: PhotosRes) => {
-      this.photosRes = photosRes;
-    });
+    const postsObs: Observable<PostsRes> = this.postService.getPosts({ _page: 1, _limit: 10 });
+    const photosObs: Observable<PhotosRes> = this.photoService.getPhotos({ _page: 1, _limit: 20 });
+    const albumsObs: Observable<AlbumsRes> = this.albumService.getAlbums({ _page: 1, _limit: 1 });
 
-    this.albumService.getAlbums({ _page: 1, _limit: 1 }).subscribe((albumRes: AlbumsRes) => {
-      this.albumRes = albumRes;
-    });
-    this.spinner.hide();
+    forkJoin([postsObs, photosObs, albumsObs]).subscribe(
+      ([postsRes, photosRes, albumRes]: [PostsRes, PhotosRes, AlbumsRes]) => {
+        this.postsRes = postsRes;
+        this.albumRes = albumRes;
+        this.photosRes = photosRes;
+
+        this.spinner.hide();
+      }
+    );
   }
 }

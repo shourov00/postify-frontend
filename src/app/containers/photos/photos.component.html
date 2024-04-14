@@ -15,11 +15,11 @@
             <div class="row g-4 gy-5 photo-lists w-100">
                 <div class="col-2" *ngFor="let photo of photosRes?.photos; trackBy trackByPhoto">
                     <div class="d-flex flex-column gap-1">
-                        <img class="rounded-2" [src]="photo.thumbnailUrl" [alt]="photo.title">
+                        <img class="rounded-4" [src]="photo.thumbnailUrl" [alt]="photo.title">
                         <h4 class="fs-5 fw-semibold text-truncate">{{photo.title}}</h4>
 
                         <button class="btn btn-danger">
-                            <a href="/posts" class="small d-flex align-items-center gap-2">
+                            <a routerLink="/photos/{{photo.id}}" class="small d-flex align-items-center gap-2">
                                 View photo
                                 <i class="bi bi-arrow-right"></i>
                             </a>

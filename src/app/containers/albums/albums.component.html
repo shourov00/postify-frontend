@@ -14,18 +14,18 @@
     <ng-container *ngIf="albumsRes && albumsRes.total > 0; else noAlbumsTemplate">
       <div class="row g-3 albums">
         <div class="col-md-3" *ngFor="let album of albumsRes?.albums; trackBy trackByAlbum">
-          <div class="d-flex flex-column  rounded-4 border border-primary p-3">
+          <div class="d-flex flex-column  rounded-4 border border-success p-3">
             <h4 class="fw-semibold text-truncate">{{album.title}}</h4>
             <div class="small">Created By <span class="fw-medium">{{findUserById(album.userId)?.name}}</span></div>
 
             <div class="row mt-2 w-100 g-2">
               <div class="col-sm-3" *ngFor="let photo of album.photos;">
-                <img style="height: 60px" [src]="photo.thumbnailUrl" [alt]="photo.title">
+                <img class="rounded-2" style="height: 60px" [src]="photo.thumbnailUrl" [alt]="photo.title">
               </div>
             </div>
 
             <button class="btn btn-danger mt-4" >
-              <a href="/posts" class="small d-flex align-items-center gap-2">
+              <a routerLink="/albums/{{album.id}}" class="small d-flex align-items-center gap-2">
                 View more
                 <i class="bi bi-arrow-right"></i>
               </a>

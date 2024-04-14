@@ -5,7 +5,7 @@ import { NgClass, NgForOf, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PostService } from '@services/post/post.service';
 import { Post, PostsRes } from '@services/post/post.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { debounceTime } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -26,7 +26,8 @@ import { SearchFiltersComponent } from '../../components/search-filters/search-f
     NgIf,
     NgxSpinnerModule,
     PaginationComponent,
-    SearchFiltersComponent
+    SearchFiltersComponent,
+    RouterLink
   ],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss'

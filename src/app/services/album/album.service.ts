@@ -6,6 +6,7 @@ import { environment } from '@env/environment';
 import { HttpResponse } from '@angular/common/http';
 import { Album, AlbumsRes } from '@services/album/album.model';
 import { Photo } from '@services/photo/photo.model';
+import {Post} from "@services/post/post.model";
 
 @Injectable({
   providedIn: 'root'
@@ -54,5 +55,9 @@ export class AlbumService {
         );
       })
     );
+  };
+
+  getAlbumDetails = (albumId: string): Observable<Album> => {
+    return this.apiService.getBody<Album>(`${environment.apiUrl}/albums/${albumId}`).pipe();
   };
 }

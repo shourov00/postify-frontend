@@ -8,7 +8,7 @@ import { User } from '@services/user/user.model';
 import { Album, AlbumsRes } from '@services/album/album.model';
 import { Subject } from 'rxjs';
 import { UserService } from '@services/user/user.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { QueryLocalParams, QueryParams } from '@services/api/api.model';
 import { debounceTime } from 'rxjs/operators';
@@ -25,7 +25,8 @@ import { SearchFiltersComponent } from '../../components/search-filters/search-f
     PaginationComponent,
     ReactiveFormsModule,
     FormsModule,
-    SearchFiltersComponent
+    SearchFiltersComponent,
+    RouterLink
   ],
   templateUrl: './albums.component.html',
   styleUrl: './albums.component.scss'

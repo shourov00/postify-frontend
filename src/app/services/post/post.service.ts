@@ -36,4 +36,8 @@ export class PostService {
       })
     );
   };
+
+  getPostDetails = (postId: string): Observable<Post> => {
+    return this.apiService.getBody<Post>(`${environment.apiUrl}/posts/${postId}`).pipe();
+  };
 }

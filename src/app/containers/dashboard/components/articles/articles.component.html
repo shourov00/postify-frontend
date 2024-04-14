@@ -4,7 +4,7 @@
             <div class="mt-2 d-flex justify-content-between align-items-center">
                 <h3 class="fs-2 fw-bold">Top articles</h3>
 
-                <a href="/posts" class="d-flex align-items-center gap-2 me-4">
+                <a routerLink="/posts" class="d-flex align-items-center gap-2 me-4">
                     Read more
                     <i class="bi bi-arrow-right"></i>
                 </a>
@@ -18,7 +18,7 @@
                                 {{post.id < 10 ? '0' + post.id : post.id}}
                             </div>
                             <div class="d-flex flex-column gap-2">
-                                <a href="/" class="fs-6 article-title text-decoration-none fw-medium">{{post.title}}</a>
+                                <a routerLink="/posts/{{post.id}}" class="fs-6 article-title text-decoration-none fw-medium">{{post.title}}</a>
                                 <span class="small text-gray">{{post.createdAt | date: 'MMM dd, yyyy'}}</span>
                             </div>
                         </div>

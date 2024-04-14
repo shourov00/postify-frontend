@@ -4,7 +4,7 @@
             <div class="mt-2 d-flex justify-content-between align-items-center">
                 <h3 class="fs-2 fw-bold">Recent Photos</h3>
 
-                <a href="/photos" class="d-flex align-items-center gap-2 me-4">
+                <a routerLink="/photos" class="d-flex align-items-center gap-2 me-4">
                     View more
                     <i class="bi bi-arrow-right"></i>
                 </a>
@@ -12,8 +12,9 @@
 
             <div class="photos">
                 <div class="row mt-2 w-100 g-3">
-                    <div class="col-sm" *ngFor="let photo of photos; trackBy: trackByPhoto">
-                        <img class="photo" [src]="photo.thumbnailUrl" [alt]="photo.title">
+                    <div routerLink="/photos/{{photo.id}}" class="col-sm custom-link"
+                         *ngFor="let photo of photos; trackBy: trackByPhoto">
+                        <img class="photo rounded-4" [src]="photo.thumbnailUrl" [alt]="photo.title">
                     </div>
                 </div>
             </div>

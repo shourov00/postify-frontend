@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Breadcrumb } from '../../components/breadcrumbs/breadcrumbs.model';
 import { Subject } from 'rxjs';
 import { UserService } from '@services/user/user.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { QueryLocalParams, QueryParams } from '@services/api/api.model';
 import { debounceTime } from 'rxjs/operators';
@@ -24,7 +24,8 @@ import { PhotoService } from '@services/photo/photo.service';
     PaginationComponent,
     ReactiveFormsModule,
     FormsModule,
-    SearchFiltersComponent
+    SearchFiltersComponent,
+    RouterLink
   ],
   templateUrl: './photos.component.html',
   styleUrl: './photos.component.scss'

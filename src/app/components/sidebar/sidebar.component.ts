@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { Menu, MenuApp } from '../../shared/models/Menu';
 import { NgClass, NgForOf } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [NgForOf, NgClass],
+  imports: [NgForOf, NgClass, RouterLink],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
