@@ -54,10 +54,11 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 ## 🛠️ Technologies & Tools
 ![](https://img.shields.io/badge/Code-JavaScript-informational?style=flat&color=informational&logo=typescript)
-![](https://img.shields.io/badge/Code-React-informational?style=flat&color=informational&logo=angular)
+![](https://img.shields.io/badge/Code-Angular-informational?style=flat&color=informational&logo=angular)
 ![](https://img.shields.io/badge/Code-Node-informational?style=flat&color=informational&logo=node.js)
+![](https://img.shields.io/badge/Code-NgRx-informational?style=flat&color=informational&logo=Ngrx)
 ![](https://img.shields.io/badge/Tool-Jest-informational?style=flat&color=warning&logo=jest)
-![](https://img.shields.io/badge/Tool-SCSS-informational?style=flat&color=warning&logo=sass)
+![](https://img.shields.io/badge/Styles-SCSS-informational?style=flat&color=warning&logo=sass)
 ![](https://img.shields.io/badge/Tool-Docker-informational?style=flat&color=warning&logo=docker)
 
 

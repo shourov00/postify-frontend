@@ -60,7 +60,6 @@ export class UserComponent implements OnInit {
           this.titleService.setTitle(`Postify - ${user.name}`);
           this.user = user;
         }
-
         this.spinner.hide();
       });
     }

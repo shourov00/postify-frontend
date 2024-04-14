@@ -1,6 +1,6 @@
-import { Component, EventEmitter, HostListener, Inject, Input, OnInit, Output } from '@angular/core';
-import { DOCUMENT, NgClass, NgForOf, NgIf, NgSwitch } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {Component, EventEmitter, inject, Inject, Input, OnInit, Output} from '@angular/core';
+import {DOCUMENT, NgClass, NgForOf, NgIf, NgSwitch} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 import {
   NgbPagination,
   NgbPaginationEllipsis,
@@ -10,7 +10,12 @@ import {
   NgbPaginationNumber,
   NgbPaginationPrevious
 } from '@ng-bootstrap/ng-bootstrap';
-import { environment } from '@env/environment';
+import {environment} from '@env/environment';
+import {AppState, ScreenModeResolution} from '@store/core/models/core.models';
+import {selectScreenModeResolution} from "@store/core/core.selectors";
+import {select, Store} from '@ngrx/store';
+import {Observable} from "rxjs";
+import {CoreFacade} from "@store/core/core.facade";
 
 @Component({
   selector: 'app-pagination',
@@ -33,6 +38,8 @@ import { environment } from '@env/environment';
   styleUrl: './pagination.component.scss'
 })
 export class PaginationComponent implements OnInit {
+  private readonly coreFacade: CoreFacade = inject(CoreFacade);
+
   @Input()
   currentPage: number = 1;
 
@@ -44,21 +51,21 @@ export class PaginationComponent implements OnInit {
 
   @Output() newPageNumber = new EventEmitter<number>();
 
-  isMobile: boolean = false;
+  mode?: ScreenModeResolution;
 
-  constructor(@Inject(DOCUMENT) private document: Document) {}
-
-  ngOnInit() {
-    const screenWidth = this.document.documentElement.clientWidth;
-    this.isMobile = screenWidth <= 768;
+  constructor(
+    @Inject(DOCUMENT) private document: Document
+  ) {
+    this.coreFacade.mode$.subscribe((mode: ScreenModeResolution) => this.mode = mode)
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
-    this.isMobile = (event.target as Window).innerWidth < 768;
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
   }
 
   handlePageChange(page: number): void {
     this.newPageNumber.emit(page);
   }
+
+  protected readonly ScreenModeResolution = ScreenModeResolution;
 }

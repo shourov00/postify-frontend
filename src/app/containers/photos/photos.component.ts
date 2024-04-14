@@ -96,7 +96,6 @@ export class PhotosComponent implements OnInit {
     if (search) queryParams['title_like'] = search; // search by title
 
     this.photoService.getPhotos(queryParams).subscribe((photosRes: PhotosRes) => {
-      console.log(photosRes);
       this.photosRes = photosRes;
       this.currentPage = photosRes.currentPage;
       this.lastPage = photosRes.lastPage;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { BreadcrumbsComponent } from '../../components/breadcrumbs/breadcrumbs.component';
 import { NgForOf, NgIf } from '@angular/common';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
@@ -7,7 +7,6 @@ import { Breadcrumb } from '../../components/breadcrumbs/breadcrumbs.model';
 import { User } from '@services/user/user.model';
 import { Album, AlbumsRes } from '@services/album/album.model';
 import { Subject } from 'rxjs';
-import { UserService } from '@services/user/user.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { QueryLocalParams, QueryParams } from '@services/api/api.model';
@@ -15,6 +14,7 @@ import { debounceTime } from 'rxjs/operators';
 import { AlbumService } from '@services/album/album.service';
 import { SearchFiltersComponent } from '../../components/search-filters/search-filters.component';
 import { environment } from '@env/environment';
+import { UsersFacade } from '@store/users/users.facade';
 
 @Component({
   selector: 'app-albums',
@@ -33,6 +33,8 @@ import { environment } from '@env/environment';
   styleUrl: './albums.component.scss'
 })
 export class AlbumsComponent implements OnInit {
+  private readonly usersFacade: UsersFacade = inject(UsersFacade);
+
   public breadcrumbs: Breadcrumb[] = [
     {
       title: 'Albums',
@@ -59,14 +61,17 @@ export class AlbumsComponent implements OnInit {
 
   constructor(
     private albumService: AlbumService,
-    private userService: UserService,
     private router: Router,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService
-  ) {}
+  ) {
+    this.usersFacade.users$.subscribe((users: User[]) => {
+      this.users = users;
+    });
+  }
 
   ngOnInit(): void {
-    this.loadUsers();
+    this.usersFacade.loadUsers();
 
     this.route.queryParams.subscribe(params => {
       this.loadAlbums(params);
@@ -94,12 +99,6 @@ export class AlbumsComponent implements OnInit {
     });
   }
 
-  loadUsers(): void {
-    this.userService.getUsers().subscribe((users: User[]) => {
-      this.users = users;
-    });
-  }
-
   loadAlbums({ page, limit, search, userId }: QueryLocalParams): void {
     this.spinner.show();
 
@@ -124,7 +123,7 @@ export class AlbumsComponent implements OnInit {
   }
 
   findUserById(userId: number): User | null {
-    return this.userService.findUserById(userId, this.users);
+    return this.users.find((item: User) => item.id === userId) || null;
   }
 
   applySearch(search: string): void {

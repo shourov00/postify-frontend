@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Breadcrumb } from '../../components/breadcrumbs/breadcrumbs.model';
 import { BreadcrumbsComponent } from '../../components/breadcrumbs/breadcrumbs.component';
 import { NgClass, NgForOf, NgIf } from '@angular/common';
@@ -15,6 +15,7 @@ import { QueryLocalParams, QueryParams } from '@services/api/api.model';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
 import { SearchFiltersComponent } from '../../components/search-filters/search-filters.component';
 import { environment } from '@env/environment';
+import { UsersFacade } from '@store/users/users.facade';
 
 @Component({
   selector: 'app-posts',
@@ -34,6 +35,7 @@ import { environment } from '@env/environment';
   styleUrl: './posts.component.scss'
 })
 export class PostsComponent implements OnInit {
+  private readonly usersFacade: UsersFacade = inject(UsersFacade);
   public breadcrumbs: Breadcrumb[] = [
     {
       title: 'Posts',
@@ -64,14 +66,17 @@ export class PostsComponent implements OnInit {
 
   constructor(
     private postService: PostService,
-    private userService: UserService,
     private router: Router,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService
-  ) {}
+  ) {
+    this.usersFacade.users$.subscribe((users: User[]) => {
+      this.users = users;
+    });
+  }
 
   ngOnInit(): void {
-    this.loadUsers();
+    this.usersFacade.loadUsers();
 
     this.route.queryParams.subscribe(params => {
       this.loadPosts(params);
@@ -98,12 +103,6 @@ export class PostsComponent implements OnInit {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: queryParams
-    });
-  }
-
-  loadUsers(): void {
-    this.userService.getUsers().subscribe((users: User[]) => {
-      this.users = users;
     });
   }
 
@@ -135,7 +134,7 @@ export class PostsComponent implements OnInit {
   }
 
   findUserById(userId: number): User | null {
-    return this.userService.findUserById(userId, this.users);
+    return this.users.find((item: User) => item.id === userId) || null;
   }
 
   applySearch(search: string): void {

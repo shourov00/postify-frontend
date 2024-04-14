@@ -32,6 +32,9 @@
       ],
       "@utility/*": [
         "src/app/shared/utility/*"
+      ],
+      "@store/*": [
+        "src/app/store/*"
       ]
     }
   },

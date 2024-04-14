@@ -8,9 +8,10 @@
       "files": [
         "*.ts"
       ],
-     
       "parserOptions": {
-        "project": ["tsconfig.json"],
+        "project": [
+          "tsconfig.json"
+        ],
         "createDefaultProgram": true,
         "sourceType": "module",
         "allowImportExportEverywhere": true
@@ -40,18 +41,7 @@
             "style": "kebab-case"
           }
         ],
-        /* "sort-imports":[
-          "warn",
-          {
-            "ignoreCase": true,
-            "ignoreDeclarationSort": false,
-            "ignoreMemberSort": false,
-            "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
-            "allowSeparatedGroups": false
-
-          }
-        ], */
-        "prettier/prettier":[
+        "prettier/prettier": [
           "error",
           {},
           {
@@ -68,9 +58,7 @@
       "extends": [
         "plugin:@angular-eslint/template/recommended"
       ],
-      "rules": {
-       
-      }
+      "rules": {}
     },
     {
       "files": [
@@ -82,14 +70,20 @@
         "babelOptions": {
           "babelrc": false,
           "configFile": false,
-          // your babel options
-          "presets": ["@babel/preset-env"]
+          "presets": [
+            "@babel/preset-env"
+          ]
         }
       },
-      "rules": {
-       
-      }
+      "rules": {}
+    },
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "plugin:@ngrx/recommended"
+      ]
     }
-     
   ]
 }

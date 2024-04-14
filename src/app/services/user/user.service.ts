@@ -44,8 +44,4 @@ export class UserService {
       })
     );
   };
-
-  findUserById(userId: number, users: User[]): User | null {
-    return users.find((item: User) => item.id === userId) || null;
-  }
 }

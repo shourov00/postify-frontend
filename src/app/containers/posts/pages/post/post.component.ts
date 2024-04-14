@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BreadcrumbsComponent } from '../../../../components/breadcrumbs/breadcrumbs.component';
 import { NgForOf, NgIf } from '@angular/common';
@@ -11,6 +11,7 @@ import { Post } from '@services/post/post.model';
 import { UserService } from '@services/user/user.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Title } from '@angular/platform-browser';
+import {UsersFacade} from "@store/users/users.facade";
 
 @Component({
   selector: 'app-post',
@@ -20,6 +21,8 @@ import { Title } from '@angular/platform-browser';
   styleUrl: './post.component.scss'
 })
 export class PostComponent implements OnInit {
+  private readonly usersFacade: UsersFacade = inject(UsersFacade);
+
   public breadcrumbs: Breadcrumb[] = [
     {
       title: 'Posts',
@@ -32,7 +35,6 @@ export class PostComponent implements OnInit {
   users: User[] = [];
 
   constructor(
-    private userService: UserService,
     private postService: PostService,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
@@ -44,13 +46,17 @@ export class PostComponent implements OnInit {
       link: `/posts/${this.id}`,
       isActive: true
     });
+
+    this.usersFacade.users$.subscribe((users: User[]) => {
+      this.users = users;
+    });
   }
 
   ngOnInit(): void {
-    this.spinner.show();
-    this.loadUsers();
+    this.usersFacade.loadUsers();
 
     if (this.id) {
+      this.spinner.show();
       this.postService.getPostDetails(this.id).subscribe((post: Post) => {
         this.titleService.setTitle(`Postify - ${post.title}`);
         this.post = post;
@@ -59,13 +65,7 @@ export class PostComponent implements OnInit {
     }
   }
 
-  loadUsers(): void {
-    this.userService.getUsers().subscribe((users: User[]) => {
-      this.users = users;
-    });
-  }
-
   findUserById(userId: number): User | null {
-    return this.userService.findUserById(userId, this.users);
+    return this.users.find((item: User) => item.id === userId) || null;
   }
 }

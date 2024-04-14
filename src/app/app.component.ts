@@ -1,8 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ScreenModeResolution } from '@store/core/models/core.models';
+import { Store } from '@ngrx/store';
+import { screenModeFromWidth } from '@utility/screen-size-utility';
+import { updateScreenModeResolution } from '@store/core/core.actions';
+import { CoreFacade } from '@store/core/core.facade';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +17,25 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+  private readonly coreFacade: CoreFacade = inject(CoreFacade);
+
   title = 'Postify';
+
+  private mode?: ScreenModeResolution;
 
   isCollapse: boolean = false;
 
-  constructor() {}
+  constructor(private store: Store) {
+    this.coreFacade.mode$.subscribe((mode: ScreenModeResolution) => (this.mode = mode));
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    const newMode = screenModeFromWidth(window.innerWidth);
+    if (newMode !== this.mode) {
+      this.coreFacade.updateScreenMode(newMode);
+    }
+  }
 
   setCollapse(value: boolean): void {
     this.isCollapse = value;

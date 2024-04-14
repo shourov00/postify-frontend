@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { BreadcrumbsComponent } from '../../../../components/breadcrumbs/breadcrumbs.component';
 import { NgForOf, NgIf } from '@angular/common';
@@ -9,14 +9,14 @@ import { AlbumService } from '@services/album/album.service';
 import { debounceTime } from 'rxjs/operators';
 import { User } from '@services/user/user.model';
 import { Album } from '@services/album/album.model';
-import { UserService } from '@services/user/user.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Photo, PhotosRes } from '@services/photo/photo.model';
-import { forkJoin, Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { PhotoService } from '@services/photo/photo.service';
 import { QueryLocalParams, QueryParams } from '@services/api/api.model';
 import { environment } from '@env/environment';
 import { Title } from '@angular/platform-browser';
+import { UsersFacade } from '@store/users/users.facade';
 
 @Component({
   selector: 'app-album',
@@ -26,6 +26,7 @@ import { Title } from '@angular/platform-browser';
   styleUrl: './album.component.scss'
 })
 export class AlbumComponent implements OnInit {
+  private readonly usersFacade: UsersFacade = inject(UsersFacade);
   public breadcrumbs: Breadcrumb[] = [
     {
       title: 'Albums',
@@ -50,7 +51,6 @@ export class AlbumComponent implements OnInit {
   searchInput: Subject<string> = new Subject<string>();
 
   constructor(
-    private userService: UserService,
     private photosService: PhotoService,
     private albumService: AlbumService,
     private route: ActivatedRoute,
@@ -64,24 +64,23 @@ export class AlbumComponent implements OnInit {
       link: `/albums/${this.id}`,
       isActive: true
     });
+
+    this.usersFacade.users$.subscribe((users: User[]) => {
+      this.users = users;
+    });
   }
 
   ngOnInit(): void {
-    this.spinner.show();
-
     if (this.id) {
-      const userAPI: Observable<User[]> = this.userService.getUsers();
-      const albumAPI: Observable<Album> = this.albumService.getAlbumDetails(this.id);
-
-      forkJoin([userAPI, albumAPI]).subscribe(([users, album]: [User[], Album]) => {
+      this.spinner.show();
+      this.albumService.getAlbumDetails(this.id).subscribe((album: Album) => {
         this.titleService.setTitle(`Postify - ${album.title}`);
-        this.users = users;
         this.album = album;
-        this.spinner.hide();
       });
 
       this.route.queryParams.subscribe(params => {
         this.loadAlbumPhotos(params);
+        this.spinner.hide();
       });
 
       this.searchInput.pipe(debounceTime(500)).subscribe(value => {
@@ -91,7 +90,7 @@ export class AlbumComponent implements OnInit {
   }
 
   findUserById(userId: number): User | null {
-    return this.userService.findUserById(userId, this.users);
+    return this.users.find((item: User) => item.id === userId) || null;
   }
 
   queryPosts({ page, limit, search }: QueryLocalParams): void {
