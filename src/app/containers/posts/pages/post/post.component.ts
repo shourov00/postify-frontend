@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BreadcrumbsComponent } from '../../../../components/breadcrumbs/breadcrumbs.component';
 import { NgForOf, NgIf } from '@angular/common';
@@ -8,10 +8,9 @@ import { Breadcrumb } from '../../../../components/breadcrumbs/breadcrumbs.model
 import { PostService } from '@services/post/post.service';
 import { User } from '@services/user/user.model';
 import { Post } from '@services/post/post.model';
-import { UserService } from '@services/user/user.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Title } from '@angular/platform-browser';
-import {UsersFacade} from "@store/users/users.facade";
+import { UsersFacade } from '@store/users/users.facade';
 
 @Component({
   selector: 'app-post',

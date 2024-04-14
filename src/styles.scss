@@ -17,6 +17,8 @@ $gray-300: #d4d8f0;
 @import "bootstrap-icons/font/bootstrap-icons.css";
 @import "node_modules/ngx-spinner/animations/square-jelly-box.css";
 
+@import 'ngx-toastr/toastr-bs5-alert';
+
 
 :root {
   --bs-gray-dark: #5a5f74;

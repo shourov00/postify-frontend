@@ -8,7 +8,7 @@
         </div>
 
         <div class="posts-table table-responsive">
-            <ng-container *ngIf="users.length > 0; else noUsersTemplate">
+            <ng-container *ngIf="(this.usersFacade?.users$ | async)!.length  > 0; else noUsersTemplate">
                 <table class="table table-striped">
                     <thead>
                     <tr>
@@ -20,7 +20,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let user of users; trackBy trackByUser">
+                    <tr *ngFor="let user of this.usersFacade.users$ | async; trackBy trackByUser">
                         <td>{{ user.id }}</td>
                         <td><a routerLink="/users/{{user.id}}">{{ user.username }}</a></td>
                         <td><a routerLink="/users/{{user.id}}">{{ user.name }}</a></td>

@@ -10,6 +10,7 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { reducers } from '@store/core/core.reducer';
 import {provideEffects} from "@ngrx/effects";
 import {UsersEffects} from "@store/users/users.effects";
+import {provideToastr} from "ngx-toastr";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,6 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideStore(reducers),
     provideEffects(UsersEffects),
+    provideToastr(),
     provideStoreDevtools({ maxAge: 25, logOnly: isDevMode() })
   ]
 };
