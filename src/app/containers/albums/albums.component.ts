@@ -14,7 +14,7 @@ import { QueryLocalParams, QueryParams } from '@services/api/api.model';
 import { debounceTime } from 'rxjs/operators';
 import { AlbumService } from '@services/album/album.service';
 import { SearchFiltersComponent } from '../../components/search-filters/search-filters.component';
-import {environment} from "@env/environment";
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-albums',

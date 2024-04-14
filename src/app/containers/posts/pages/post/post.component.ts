@@ -6,11 +6,11 @@ import { PaginationComponent } from '../../../../components/pagination/paginatio
 import { SearchFiltersComponent } from '../../../../components/search-filters/search-filters.component';
 import { Breadcrumb } from '../../../../components/breadcrumbs/breadcrumbs.model';
 import { PostService } from '@services/post/post.service';
-import { debounceTime } from 'rxjs/operators';
 import { User } from '@services/user/user.model';
 import { Post } from '@services/post/post.model';
 import { UserService } from '@services/user/user.service';
-import {NgxSpinnerService} from "ngx-spinner";
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-post',
@@ -35,7 +35,8 @@ export class PostComponent implements OnInit {
     private userService: UserService,
     private postService: PostService,
     private route: ActivatedRoute,
-  private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private titleService: Title
   ) {
     this.id = this.route.snapshot.params['id'];
     this.breadcrumbs.push({
@@ -51,6 +52,7 @@ export class PostComponent implements OnInit {
 
     if (this.id) {
       this.postService.getPostDetails(this.id).subscribe((post: Post) => {
+        this.titleService.setTitle(`Postify - ${post.title}`);
         this.post = post;
         this.spinner.hide();
       });

@@ -9,6 +9,7 @@ import { UserService } from '@services/user/user.service';
 import { User } from '@services/user/user.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { KiloMegaPipe } from '../../../../shared/pipe/mega.pipe';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-user',
@@ -40,7 +41,8 @@ export class UserComponent implements OnInit {
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private titleService: Title
   ) {
     this.id = this.route.snapshot.params['id'];
     this.breadcrumbs.push({
@@ -54,7 +56,10 @@ export class UserComponent implements OnInit {
     this.spinner.show();
     if (this.id) {
       this.userService.getUserDetails(this.id).subscribe((user: User | null) => {
-        if (user) this.user = user;
+        if (user) {
+          this.titleService.setTitle(`Postify - ${user.name}`);
+          this.user = user;
+        }
 
         this.spinner.hide();
       });

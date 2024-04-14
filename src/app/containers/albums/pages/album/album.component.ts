@@ -15,7 +15,8 @@ import { Photo, PhotosRes } from '@services/photo/photo.model';
 import { forkJoin, Observable, Subject } from 'rxjs';
 import { PhotoService } from '@services/photo/photo.service';
 import { QueryLocalParams, QueryParams } from '@services/api/api.model';
-import {environment} from "@env/environment";
+import { environment } from '@env/environment';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-album',
@@ -54,7 +55,8 @@ export class AlbumComponent implements OnInit {
     private albumService: AlbumService,
     private route: ActivatedRoute,
     private router: Router,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private titleService: Title
   ) {
     this.id = this.route.snapshot.params['id'];
     this.breadcrumbs.push({
@@ -72,6 +74,7 @@ export class AlbumComponent implements OnInit {
       const albumAPI: Observable<Album> = this.albumService.getAlbumDetails(this.id);
 
       forkJoin([userAPI, albumAPI]).subscribe(([users, album]: [User[], Album]) => {
+        this.titleService.setTitle(`Postify - ${album.title}`);
         this.users = users;
         this.album = album;
         this.spinner.hide();

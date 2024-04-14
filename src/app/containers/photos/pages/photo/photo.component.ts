@@ -9,6 +9,7 @@ import { PhotoService } from '@services/photo/photo.service';
 import { User } from '@services/user/user.model';
 import { Photo } from '@services/photo/photo.model';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-photo',
@@ -31,7 +32,8 @@ export class PhotoComponent implements OnInit {
   constructor(
     private photoService: PhotoService,
     private route: ActivatedRoute,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private titleService: Title
   ) {
     this.id = this.route.snapshot.params['id'];
     this.breadcrumbs.push({
@@ -45,6 +47,7 @@ export class PhotoComponent implements OnInit {
     if (this.id) {
       this.spinner.show();
       this.photoService.getPhotoDetails(this.id).subscribe((photo: Photo) => {
+        this.titleService.setTitle(`Postify - ${photo.title}`);
         this.photo = photo;
         this.spinner.hide();
       });

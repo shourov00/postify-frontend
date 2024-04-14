@@ -9,9 +9,8 @@ describe('PhotoComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [PhotoComponent]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(PhotoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

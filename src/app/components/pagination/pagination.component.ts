@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostListener, Inject, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, HostListener, Inject, Input, OnInit, Output } from '@angular/core';
 import { DOCUMENT, NgClass, NgForOf, NgIf, NgSwitch } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -10,7 +10,7 @@ import {
   NgbPaginationNumber,
   NgbPaginationPrevious
 } from '@ng-bootstrap/ng-bootstrap';
-import {environment} from "@env/environment";
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-pagination',
@@ -32,7 +32,7 @@ import {environment} from "@env/environment";
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.scss'
 })
-export class PaginationComponent implements OnInit{
+export class PaginationComponent implements OnInit {
   @Input()
   currentPage: number = 1;
 
@@ -48,10 +48,10 @@ export class PaginationComponent implements OnInit{
 
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
- ngOnInit() {
-   const screenWidth = this.document.documentElement.clientWidth;
-   this.isMobile = screenWidth <= 768;
- }
+  ngOnInit() {
+    const screenWidth = this.document.documentElement.clientWidth;
+    this.isMobile = screenWidth <= 768;
+  }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {

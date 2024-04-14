@@ -9,9 +9,8 @@ describe('SearchFiltersComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SearchFiltersComponent]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(SearchFiltersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

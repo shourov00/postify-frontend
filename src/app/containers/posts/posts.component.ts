@@ -14,7 +14,7 @@ import { UserService } from '@services/user/user.service';
 import { QueryLocalParams, QueryParams } from '@services/api/api.model';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
 import { SearchFiltersComponent } from '../../components/search-filters/search-filters.component';
-import {environment} from "@env/environment";
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-posts',
