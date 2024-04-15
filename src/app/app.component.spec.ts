@@ -57,7 +57,6 @@ describe('AppComponent', () => {
     });
   });
 
-
   it('should update isCollapse value when setCollapse is called', () => {
     component.setCollapse(true);
     expect(component.isCollapse).toBe(true);

@@ -14,8 +14,8 @@ export class PhotosEffects {
     private spinner: NgxSpinnerService
   ) {}
 
-  getPhotos$ = createEffect(() =>
-    this.action$.pipe(
+  getPhotos$ = createEffect(() => {
+    return this.action$.pipe(
       ofType(PhotosActions.getPhotos),
       mergeMap(action => {
         const params = action.params;
@@ -26,6 +26,6 @@ export class PhotosEffects {
           finalize(() => this.spinner.hide())
         );
       })
-    )
-  );
+    );
+  });
 }

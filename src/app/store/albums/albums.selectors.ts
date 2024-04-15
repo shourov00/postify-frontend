@@ -11,13 +11,13 @@ export const selectAppState: MemoizedSelector<AppState, AlbumState> = createSele
 );
 
 /** Selector albums from album selector */
-export const albumsResSelectors: MemoizedSelector<AppState, AlbumsRes | null> = createSelector(
+export const selectAlbumsResSelectors: MemoizedSelector<AppState, AlbumsRes | null> = createSelector(
   selectAppState,
   (appState: AlbumState) => appState.albumsRes
 );
 
 /** Selector error state from album selector */
-export const errorSelector: MemoizedSelector<AppState, string | null> = createSelector(
+export const selectErrorSelector: MemoizedSelector<AppState, string | null> = createSelector(
   selectAppState,
   (appState: AlbumState) => appState.error
 );

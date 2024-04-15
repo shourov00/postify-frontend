@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PhotosComponent } from './photos.component';
-import { beforeEach, describe, expect, it, jest } from '@jest/globals';
-import {provideRouter} from "@angular/router";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {PhotoService} from "@services/photo/photo.service";
-import {ToastrModule, ToastrService} from "ngx-toastr";
+import { beforeEach, describe, expect, it } from '@jest/globals';
+import { provideRouter } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { PhotoService } from '@services/photo/photo.service';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('PhotosComponent', () => {
   let component: PhotosComponent;
@@ -14,10 +14,7 @@ describe('PhotosComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [PhotosComponent, HttpClientTestingModule, ToastrModule.forRoot()],
-      providers: [
-        PhotoService,
-        provideRouter([])
-      ]
+      providers: [PhotoService, provideRouter([])]
     }).compileComponents();
 
     fixture = TestBed.createComponent(PhotosComponent);

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeaderComponent } from './header.component';
-import { By } from "@angular/platform-browser";
+import { By } from '@angular/platform-browser';
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 
 describe('HeaderComponent', () => {

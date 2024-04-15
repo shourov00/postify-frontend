@@ -7,12 +7,11 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { PhotosComponent } from './components/photos/photos.component';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 import { ToastrModule } from 'ngx-toastr';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
-  let mockStore: MockStore;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -31,7 +30,6 @@ describe('DashboardComponent', () => {
       ]
     }).compileComponents();
 
-    mockStore = TestBed.inject(MockStore);
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

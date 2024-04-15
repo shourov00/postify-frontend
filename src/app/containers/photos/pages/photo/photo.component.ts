@@ -6,7 +6,6 @@ import { PaginationComponent } from '../../../../components/pagination/paginatio
 import { SearchFiltersComponent } from '../../../../components/search-filters/search-filters.component';
 import { Breadcrumb } from '../../../../components/breadcrumbs/breadcrumbs.model';
 import { PhotoService } from '@services/photo/photo.service';
-import { User } from '@services/user/user.model';
 import { Photo } from '@services/photo/photo.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Title } from '@angular/platform-browser';

@@ -1,10 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Post } from '@services/post/post.model';
 import { AsyncPipe, DatePipe, DecimalPipe, NgForOf, NgIf } from '@angular/common';
 import { KiloMegaPipe } from '../../../../shared/pipe/mega.pipe';
 import { RouterLink } from '@angular/router';
 import { PostsFacade } from '@store/posts/posts.facade';
-import {ToastrService} from "ngx-toastr";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-articles',
@@ -13,7 +13,7 @@ import {ToastrService} from "ngx-toastr";
   templateUrl: './articles.component.html',
   styleUrl: './articles.component.scss'
 })
-export class ArticlesComponent {
+export class ArticlesComponent implements OnInit {
   readonly postsFacade: PostsFacade = inject(PostsFacade);
 
   constructor(private toastr: ToastrService) {

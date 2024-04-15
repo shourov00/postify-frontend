@@ -26,6 +26,6 @@ export class StatisticsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.albumsFacade.loadAlbums({ _page: 1, _limit: 1 });
+    this.albumsFacade.loadAlbums({ _page: 1, _limit: 10 });
   }
 }

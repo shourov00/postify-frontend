@@ -14,8 +14,8 @@ export class UsersEffects {
     private spinner: NgxSpinnerService
   ) {}
 
-  getUsers$ = createEffect(() =>
-    this.action$.pipe(
+  getUsers$ = createEffect(() => {
+    return this.action$.pipe(
       ofType(UsersActions.getUsers),
       mergeMap(() => {
         this.spinner.show();
@@ -25,6 +25,6 @@ export class UsersEffects {
           finalize(() => this.spinner.hide())
         );
       })
-    )
-  );
+    );
+  });
 }

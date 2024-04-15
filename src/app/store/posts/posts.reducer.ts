@@ -5,18 +5,18 @@ import { postsInit, PostState } from '@store/posts/models/posts.model';
 
 export const reducer = createReducer(
   postsInit,
-  on(PostsActions.getPosts, (state: PostState) => {
+  on(PostsActions.getPosts, (state: PostState): PostState => {
     return {
       ...state
     };
   }),
-  on(PostsActions.getPostsSuccess, (state: PostState, action) => {
+  on(PostsActions.getPostsSuccess, (state: PostState, action): PostState => {
     return {
       ...state,
       postsRes: action.postsRes
     };
   }),
-  on(PostsActions.getPostsFailure, (state: PostState, action) => {
+  on(PostsActions.getPostsFailure, (state: PostState, action): PostState => {
     return {
       ...state,
       error: action.error

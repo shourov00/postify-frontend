@@ -62,7 +62,7 @@ export const USERS: User[] = faker.helpers.multiple(createRandomUser, {
   count: 5
 });
 
-function createRandomUser(): User {
+export function createRandomUser(): User {
   return {
     id: faker.number.int(),
     name: faker.internet.displayName(),

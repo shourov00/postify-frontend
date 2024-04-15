@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '@services/api/api.service';
 import { QueryParams } from '@services/api/api.model';
-import { forkJoin, map, mergeMap, Observable, of, switchMap } from 'rxjs';
+import { forkJoin, map, Observable, of, switchMap } from 'rxjs';
 import { environment } from '@env/environment';
 import { HttpResponse } from '@angular/common/http';
 import { Album, AlbumsRes } from '@services/album/album.model';
 import { Photo } from '@services/photo/photo.model';
-import { Post } from '@services/post/post.model';
 
 @Injectable({
   providedIn: 'root'

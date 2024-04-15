@@ -1,5 +1,5 @@
 import { screenModeFromWidth } from './screen-size-utils';
-import {ScreenModeResolution} from "@store/core/models/core.models";
+import { ScreenModeResolution } from '@store/core/models/core.models';
 
 describe('screenModeFromWidth', () => {
   it('returns Large screen mode for width greater than or equal to 992', () => {

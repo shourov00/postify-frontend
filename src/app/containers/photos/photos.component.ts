@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { BreadcrumbsComponent } from '../../components/breadcrumbs/breadcrumbs.component';
 import { NgForOf, NgIf } from '@angular/common';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Breadcrumb } from '../../components/breadcrumbs/breadcrumbs.model';
-import { Subject } from 'rxjs';
-import { UserService } from '@services/user/user.service';
+import { Subject, Subscription } from 'rxjs';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { QueryLocalParams, QueryParams } from '@services/api/api.model';
 import { debounceTime } from 'rxjs/operators';
 import { SearchFiltersComponent } from '../../components/search-filters/search-filters.component';
 import { Photo, PhotosRes } from '@services/photo/photo.model';
-import { PhotoService } from '@services/photo/photo.service';
+import { PhotosFacade } from '@store/photos/photos.facade';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-photos',
@@ -30,7 +30,11 @@ import { PhotoService } from '@services/photo/photo.service';
   templateUrl: './photos.component.html',
   styleUrl: './photos.component.scss'
 })
-export class PhotosComponent implements OnInit {
+export class PhotosComponent implements OnInit, OnDestroy {
+  private subscription: Subscription = new Subscription();
+
+  private readonly photosFacade: PhotosFacade = inject(PhotosFacade);
+
   public breadcrumbs: Breadcrumb[] = [
     {
       title: 'Photos',
@@ -52,12 +56,29 @@ export class PhotosComponent implements OnInit {
   searchInput: Subject<string> = new Subject<string>();
 
   constructor(
-    private photoService: PhotoService,
-    private userService: UserService,
     private router: Router,
     private route: ActivatedRoute,
-    private spinner: NgxSpinnerService
-  ) {}
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService
+  ) {
+    this.subscription.add(
+      this.photosFacade.error$.subscribe((error: string | null) => {
+        if (error) {
+          this.toastr.error(error);
+        }
+      })
+    );
+    this.subscription.add(
+      this.photosFacade.photosRes$.subscribe((photosRes: PhotosRes | null) => {
+        if (photosRes) {
+          this.photosRes = photosRes;
+          this.currentPage = photosRes.currentPage;
+          this.lastPage = photosRes.lastPage;
+          this.itemsPerPage = photosRes.perPage;
+        }
+      })
+    );
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -69,7 +90,11 @@ export class PhotosComponent implements OnInit {
     });
   }
 
-  queryPosts({ page, limit, search }: QueryLocalParams): void {
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  queryPhotos({ page, limit, search }: QueryLocalParams): void {
     const queryParams: QueryLocalParams = {
       page: page || 1,
       limit: limit || this.itemsPerPage,
@@ -95,19 +120,13 @@ export class PhotosComponent implements OnInit {
 
     if (search) queryParams['title_like'] = search; // search by title
 
-    this.photoService.getPhotos(queryParams).subscribe((photosRes: PhotosRes) => {
-      this.photosRes = photosRes;
-      this.currentPage = photosRes.currentPage;
-      this.lastPage = photosRes.lastPage;
-      this.itemsPerPage = photosRes.perPage;
-      this.searchText = search || '';
+    this.photosFacade.loadPhotos(queryParams);
 
-      this.spinner.hide();
-    });
+    this.searchText = search || '';
   }
 
   applySearch(search: string): void {
-    this.queryPosts({
+    this.queryPhotos({
       search
     });
   }
@@ -118,13 +137,13 @@ export class PhotosComponent implements OnInit {
   }
 
   onItemsPerPageSelected(value: number): void {
-    this.queryPosts({
+    this.queryPhotos({
       limit: value
     });
   }
 
   onPageChange(pageNumber: number): void {
-    this.queryPosts({
+    this.queryPhotos({
       page: pageNumber
     });
   }

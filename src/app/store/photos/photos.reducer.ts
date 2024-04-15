@@ -5,18 +5,18 @@ import { photosInit, PhotoState } from '@store/photos/models/photos.model';
 
 export const reducer = createReducer(
   photosInit,
-  on(PhotosActions.getPhotos, (state: PhotoState) => {
+  on(PhotosActions.getPhotos, (state: PhotoState): PhotoState => {
     return {
       ...state
     };
   }),
-  on(PhotosActions.getPhotosSuccess, (state: PhotoState, action) => {
+  on(PhotosActions.getPhotosSuccess, (state: PhotoState, action): PhotoState => {
     return {
       ...state,
       photosRes: action.photosRes
     };
   }),
-  on(PhotosActions.getPhotosFailure, (state: PhotoState, action) => {
+  on(PhotosActions.getPhotosFailure, (state: PhotoState, action): PhotoState => {
     return {
       ...state,
       error: action.error

@@ -5,7 +5,6 @@ import { environment } from '@env/environment';
 import { Photo, PhotosRes } from '@services/photo/photo.model';
 import { HttpResponse } from '@angular/common/http';
 import { ApiService } from '@services/api/api.service';
-import { Post } from '@services/post/post.model';
 
 @Injectable({
   providedIn: 'root'

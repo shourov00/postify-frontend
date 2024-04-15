@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { BreadcrumbsComponent } from '../../components/breadcrumbs/breadcrumbs.component';
 import { NgForOf, NgIf } from '@angular/common';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
@@ -6,15 +6,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Breadcrumb } from '../../components/breadcrumbs/breadcrumbs.model';
 import { User } from '@services/user/user.model';
 import { Album, AlbumsRes } from '@services/album/album.model';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { QueryLocalParams, QueryParams } from '@services/api/api.model';
 import { debounceTime } from 'rxjs/operators';
-import { AlbumService } from '@services/album/album.service';
 import { SearchFiltersComponent } from '../../components/search-filters/search-filters.component';
 import { environment } from '@env/environment';
 import { UsersFacade } from '@store/users/users.facade';
+import { AlbumsFacade } from '@store/albums/albums.facade';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-albums',
@@ -32,8 +33,10 @@ import { UsersFacade } from '@store/users/users.facade';
   templateUrl: './albums.component.html',
   styleUrl: './albums.component.scss'
 })
-export class AlbumsComponent implements OnInit {
+export class AlbumsComponent implements OnInit, OnDestroy {
+  private subscription: Subscription = new Subscription();
   private readonly usersFacade: UsersFacade = inject(UsersFacade);
+  private readonly albumsFacade: AlbumsFacade = inject(AlbumsFacade);
 
   public breadcrumbs: Breadcrumb[] = [
     {
@@ -60,11 +63,40 @@ export class AlbumsComponent implements OnInit {
   selectedUserId: string = '';
 
   constructor(
-    private albumService: AlbumService,
     private router: Router,
     private route: ActivatedRoute,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService
   ) {
+    this.subscription.add(
+      this.usersFacade.error$.subscribe((error: string | null) => {
+        if (error) {
+          this.toastr.error(error);
+        }
+      })
+    );
+    this.subscription.add(
+      this.usersFacade.users$.subscribe((users: User[]) => {
+        this.users = users;
+      })
+    );
+    this.subscription.add(
+      this.albumsFacade.error$.subscribe((error: string | null) => {
+        if (error) {
+          this.toastr.error(error);
+        }
+      })
+    );
+    this.subscription.add(
+      this.albumsFacade.albumsRes$.subscribe((albumsRes: AlbumsRes | null) => {
+        if (albumsRes) {
+          this.albumsRes = albumsRes;
+          this.currentPage = albumsRes.currentPage;
+          this.lastPage = albumsRes.lastPage;
+          this.itemsPerPage = albumsRes.perPage;
+        }
+      })
+    );
     this.usersFacade.users$.subscribe((users: User[]) => {
       this.users = users;
     });
@@ -80,6 +112,10 @@ export class AlbumsComponent implements OnInit {
     this.searchInput.pipe(debounceTime(500)).subscribe(value => {
       this.applySearch(value);
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   queryPosts({ page, limit, search, userId }: QueryLocalParams): void {
@@ -100,7 +136,7 @@ export class AlbumsComponent implements OnInit {
   }
 
   loadAlbums({ page, limit, search, userId }: QueryLocalParams): void {
-    console.log('called')
+    console.log('called');
     this.spinner.show();
 
     const queryParams: QueryParams = {
@@ -111,16 +147,10 @@ export class AlbumsComponent implements OnInit {
     if (search) queryParams['title_like'] = search; // search by title
     if (userId) queryParams['userId'] = userId; // filter by userId
 
-    this.albumService.getAlbums(queryParams).subscribe((albumsRes: AlbumsRes) => {
-      this.albumsRes = albumsRes;
-      this.currentPage = albumsRes.currentPage;
-      this.lastPage = albumsRes.lastPage;
-      this.itemsPerPage = albumsRes.perPage;
-      this.searchText = search || '';
-      this.selectedUserId = userId || '';
+    this.albumsFacade.loadAlbums(queryParams);
 
-      this.spinner.hide();
-    });
+    this.searchText = search || '';
+    this.selectedUserId = userId || '';
   }
 
   findUserById(userId: number): User | null {

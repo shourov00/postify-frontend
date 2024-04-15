@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { PhotosFacade } from '@store/photos/photos.facade';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 import { Photo } from '@services/photo/photo.model';
 import { errorSelector } from '@store/photos/photos.selectors';
 

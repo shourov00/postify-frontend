@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SidebarComponent } from './sidebar.component';
-import {provideRouter, Router} from "@angular/router";
-import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import { provideRouter, Router } from '@angular/router';
+import { beforeEach, describe, expect, it } from '@jest/globals';
 
 describe('SidebarComponent', () => {
   let component: SidebarComponent;
@@ -12,9 +12,7 @@ describe('SidebarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SidebarComponent],
-      providers: [
-        provideRouter([])
-      ]
+      providers: [provideRouter([])]
     }).compileComponents();
 
     fixture = TestBed.createComponent(SidebarComponent);

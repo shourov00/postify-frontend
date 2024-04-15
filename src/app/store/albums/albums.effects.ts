@@ -14,8 +14,8 @@ export class AlbumsEffects {
     private spinner: NgxSpinnerService
   ) {}
 
-  getAlbums$ = createEffect(() =>
-    this.action$.pipe(
+  getAlbums$ = createEffect(() => {
+    return this.action$.pipe(
       ofType(AlbumsActions.getAlbums),
       mergeMap(action => {
         const params = action.params;
@@ -26,6 +26,6 @@ export class AlbumsEffects {
           finalize(() => this.spinner.hide())
         );
       })
-    )
-  );
+    );
+  });
 }

@@ -14,8 +14,8 @@ export class PostsEffects {
     private spinner: NgxSpinnerService
   ) {}
 
-  getPosts$ = createEffect(() =>
-    this.action$.pipe(
+  getPosts$ = createEffect(() => {
+    return this.action$.pipe(
       ofType(PostsActions.getPosts),
       mergeMap(action => {
         const params = action.params;
@@ -26,6 +26,6 @@ export class PostsEffects {
           finalize(() => this.spinner.hide())
         );
       })
-    )
-  );
+    );
+  });
 }

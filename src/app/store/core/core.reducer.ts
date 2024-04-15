@@ -26,13 +26,13 @@ export const initialState: InfoState = {
 
 export const reducer: ActionReducer<InfoState> = createReducer(
   initialState,
-  on(CoreActions.updateScreenModeResolution, (state: InfoState, action) => {
+  on(CoreActions.updateScreenModeResolution, (state: InfoState, action): InfoState => {
     return {
       ...state,
       screenModeResolution: action.mode
     };
   }),
-  on(CoreActions.actionSetLoading, (state, action) => {
+  on(CoreActions.actionSetLoading, (state, action): InfoState => {
     return { ...state, loader: action.loader };
   })
 );

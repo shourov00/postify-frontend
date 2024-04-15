@@ -1,7 +1,7 @@
 <ngb-pagination class="mt-5 d-flex justify-content-center" [collectionSize]="(lastPage * itemsPerPage)"  [pageSize]="itemsPerPage"
                 (pageChange)="handlePageChange($event)"
-                [(page)]="currentPage" [maxSize]="mode == ScreenModeResolution.Mobile ? 3 : 5" [rotate]="true" [boundaryLinks]="true">
-    <ng-container *ngIf="mode != ScreenModeResolution.Mobile">
+                [(page)]="currentPage" [maxSize]="mode === ScreenModeResolution.Mobile ? 3 : 5" [rotate]="true" [boundaryLinks]="true">
+    <ng-container *ngIf="mode !== ScreenModeResolution.Mobile">
         <ng-template ngbPaginationFirst>First</ng-template>
         <ng-template ngbPaginationLast>Last</ng-template>
         <ng-template ngbPaginationPrevious>Prev</ng-template>

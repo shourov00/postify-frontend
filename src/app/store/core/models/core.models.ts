@@ -1,7 +1,7 @@
 import { UserState } from '@store/users/models/users.model';
 import { PostState } from '@store/posts/models/posts.model';
 import { AlbumState } from '@store/albums/models/albums.model';
-import {PhotoState} from "@store/photos/models/photos.model";
+import { PhotoState } from '@store/photos/models/photos.model';
 
 export interface AppState {
   core: InfoState;

@@ -5,18 +5,18 @@ import { albumsInit, AlbumState } from '@store/albums/models/albums.model';
 
 export const reducer = createReducer(
   albumsInit,
-  on(AlbumsActions.getAlbums, (state: AlbumState) => {
+  on(AlbumsActions.getAlbums, (state: AlbumState): AlbumState => {
     return {
       ...state
     };
   }),
-  on(AlbumsActions.getAlbumsSuccess, (state: AlbumState, action) => {
+  on(AlbumsActions.getAlbumsSuccess, (state: AlbumState, action): AlbumState => {
     return {
       ...state,
       albumsRes: action.albumsRes
     };
   }),
-  on(AlbumsActions.getAlbumsFailure, (state: AlbumState, action) => {
+  on(AlbumsActions.getAlbumsFailure, (state: AlbumState, action): AlbumState => {
     return {
       ...state,
       error: action.error

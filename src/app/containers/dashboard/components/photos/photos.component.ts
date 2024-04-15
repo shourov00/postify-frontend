@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Photo } from '@services/photo/photo.model';
-import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
+import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { PhotosFacade } from '@store/photos/photos.facade';
 import { ToastrService } from 'ngx-toastr';
