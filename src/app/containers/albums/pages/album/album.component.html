@@ -16,8 +16,10 @@
                 <div class="row g-4">
                     <div class="col-md-2 mb-2" *ngFor="let photo of photosRes?.photos; trackBy trackByPhoto">
                         <img class="w-100 rounded-4" [src]="photo.thumbnailUrl" [alt]="photo.title">
-                        <div routerLink="/photos/{{photo.id}}"
-                             class="text-truncate mt-2 fw-medium w-100 custom-link">{{photo.title}}</div>
+                        <div class="text-truncate mt-2 ">
+                          <a routerLink="/photos/{{photo.id}}"
+                             class="text-truncate fw-medium w-100">{{photo.title}}</a>
+                        </div>
                     </div>
                 </div>
 
