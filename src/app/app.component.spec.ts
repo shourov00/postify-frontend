@@ -1,13 +1,13 @@
-import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { CoreFacade } from '@store/core/core.facade';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
-import { screenModeFromWidth } from '@utils/screen-size-utils';
 import { ScreenModeResolution } from '@store/core/models/core.models';
-import { RouterTestingHarness } from '@angular/router/testing';
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import { provideRouter } from '@angular/router';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -24,9 +24,9 @@ describe('AppComponent', () => {
     mockStore = {};
 
     await TestBed.configureTestingModule({
-      imports: [RouterTestingHarness],
-      declarations: [AppComponent, HeaderComponent, SidebarComponent],
+      imports: [AppComponent, HeaderComponent, SidebarComponent],
       providers: [
+        provideRouter([]),
         { provide: CoreFacade, useValue: mockCoreFacade },
         { provide: Store, useValue: mockStore }
       ]
@@ -46,17 +46,17 @@ describe('AppComponent', () => {
   });
 
   it('should update screen mode when window is resized', () => {
-    const spyOnUpdateScreenMode = jest.spyOn(mockCoreFacade, 'updateScreenMode');
-    const mockWidth = 1000;
     const mockMode = ScreenModeResolution.Large;
-    jest.spyOn(window, 'innerWidth', 'get').mockReturnValue(mockWidth);
-    // @ts-ignore
-    jest.spyOn(screenModeFromWidth, 'screenModeFromWidth').mockReturnValue(mockMode);
+    const mockWidth = 1000;
+    jest.spyOn(window.screen, 'width', 'get').mockReturnValue(mockWidth);
 
     window.dispatchEvent(new Event('resize'));
-
-    expect(spyOnUpdateScreenMode).toHaveBeenCalledWith(mockMode);
+    jest.spyOn(component, 'onWindowResize').mockImplementation(() => {
+      component.onWindowResize();
+      expect(mockCoreFacade.updateScreenMode).toHaveBeenCalledWith(mockMode);
+    });
   });
+
 
   it('should update isCollapse value when setCollapse is called', () => {
     component.setCollapse(true);

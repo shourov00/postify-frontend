@@ -4,7 +4,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ScreenModeResolution } from '@store/core/models/core.models';
-import { Store } from '@ngrx/store';
 import { screenModeFromWidth } from '@utils/screen-size-utils';
 import { CoreFacade } from '@store/core/core.facade';
 
@@ -24,7 +23,7 @@ export class AppComponent {
 
   isCollapse: boolean = false;
 
-  constructor(private store: Store) {
+  constructor() {
     this.coreFacade.mode$.subscribe((mode: ScreenModeResolution) => (this.mode = mode));
   }
 
